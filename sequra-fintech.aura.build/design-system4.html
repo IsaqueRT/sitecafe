@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html class="bg-[#050505] text-[#eae4d8] selection:bg-[#c5a67c]/30 selection:text-white scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sequra — Design System & Pattern Library</title>
+<script src="assets/176e894661aa9cdc_3.4.17"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="assets/3ca3ce325beb8ca0_css2.css" rel="stylesheet"/>
+<script src="assets/851bed7af266f96a_iconify-icon.min.js"></script>
+<script src="assets/efc85c7eb1418197_gsap.min.js"></script>
+<script src="assets/65f6c13748b0c8d8_ScrollTrigger.min.js"></script>
+<script>
+tailwind.config = {
+  theme: { extend: {
+    fontFamily: { serif: ['"Cormorant Garamond"','serif'], sans: ['Inter','sans-serif'], mono: ['"JetBrains Mono"','monospace'] },
+    colors: { brand: { bg:'#050505', cream:'#eae4d8', gold:'#c5a67c', muted:'#7a7a7a', dark:'#111111' } }
+  }}
+}
+</script>
+<style>
+/* ── Keyframes from original ── */
+@keyframes heroBeamFlow{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+@keyframes heroBeamFadeIn{from{opacity:0}to{opacity:1}}
+.hero-beam{opacity:0;animation:heroBeamFadeIn .8s ease 2s forwards,heroBeamFlow 3.2s linear 2s infinite;will-change:stroke-dashoffset}
+@keyframes auraFadeUp{from{opacity:0;transform:translateY(28px);filter:blur(8px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@keyframes auraWordIn{from{opacity:0;transform:translateY(0.5em) rotate(2deg);filter:blur(6px)}to{opacity:1;transform:translateY(0) rotate(0);filter:blur(0)}}
+.aura-word{display:inline-block;will-change:transform,opacity,filter;animation:auraWordIn .9s cubic-bezier(.16,1,.3,1) both}
+.aura-inview{animation:auraFadeUp 1s cubic-bezier(.16,1,.3,1) both}
+/* ── Transitions from original ── */
+a,button,input,textarea,iconify-icon{transition:transform .4s cubic-bezier(.16,1,.3,1),color .4s ease,background-color .4s ease,border-color .4s ease,box-shadow .4s ease,letter-spacing .4s ease,filter .4s ease}
+a:hover iconify-icon,button:hover iconify-icon{transform:translateY(-1px)}
+.feat-section .reveal.group:hover{transform:translateY(-6px);box-shadow:0 24px 60px -20px rgba(197,166,124,.25)}
+.feat-section .reveal.group:hover iconify-icon{transform:scale(1.15) rotate(-6deg);filter:drop-shadow(0 0 12px rgba(197,166,124,.5))}
+input:focus,textarea:focus{box-shadow:0 0 0 1px rgba(197,166,124,.4),0 8px 30px -12px rgba(197,166,124,.3);transform:translateY(-1px)}
+button:hover,a.bg-brand-cream:hover{box-shadow:0 12px 40px -10px rgba(234,228,216,.35)}
+nav a:hover{color:#c5a67c}
+/* ── Scroll progress ── */
+#scroll-progress{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,#c5a67c,#eae4d8);z-index:60;box-shadow:0 0 12px rgba(197,166,124,.6)}
+/* ── Char & magnetic ── */
+.char{display:inline-block;will-change:transform,opacity,filter}
+.magnetic{will-change:transform}
+/* ── DS nav section indicator ── */
+.ds-nav-item.active{color:#c5a67c}
+/* ── DS section label ── */
+.ds-section-rule{border-top:1px solid rgba(255,255,255,.05)}
+/* ── Motion demo boxes ── */
+@keyframes ds-lift{0%,100%{transform:translateY(0);box-shadow:0 4px 20px rgba(197,166,124,0)}50%{transform:translateY(-8px);box-shadow:0 24px 40px rgba(197,166,124,.3)}}
+.ds-motion-lift-demo:hover{animation:ds-lift .6s cubic-bezier(.16,1,.3,1) forwards}
+/* ── States demo helper ── */
+.state-label{font-size:0.6rem;letter-spacing:.2em;text-transform:uppercase;font-family:"JetBrains Mono",monospace;color:#7a7a7a;margin-bottom:.5rem;display:block}
+/* offline */
+html,body{opacity:1!important;visibility:visible!important}
+</style>
+</head>
+
+<body class="font-sans text-brand-cream antialiased font-light bg-brand-bg relative overflow-x-hidden">
+
+<div id="scroll-progress"></div>
+<canvas class="fixed inset-0 z-0 pointer-events-none opacity-40" id="ambient-canvas"></canvas>
+
+<!-- ══════════════════════════════════
+     FIXED HEADER / NAV
+══════════════════════════════════ -->
+<header class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-brand-bg/60 border-b border-white/5">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 h-20 flex items-center justify-between">
+    <a class="flex items-center gap-2 group" href="#top">
+      <svg class="transition-transform duration-500 group-hover:rotate-90" fill="none" height="26" viewBox="0 0 32 32" width="26">
+        <path d="M16 2 L20 12 L30 16 L20 20 L16 30 L12 20 L2 16 L12 12 Z" fill="#c5a67c"></path>
+      </svg>
+      <span class="text-sm tracking-[0.35em] font-medium uppercase">SEQURA DS</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-6 text-xs tracking-[0.2em] uppercase text-brand-muted">
+      <a href="#top" class="hover:text-brand-cream transition-colors">Hero</a>
+      <a href="#typography" class="hover:text-brand-cream transition-colors">Typography</a>
+      <a href="#colors" class="hover:text-brand-cream transition-colors">Colors</a>
+      <a href="#components" class="hover:text-brand-cream transition-colors">Components</a>
+      <a href="#layout" class="hover:text-brand-cream transition-colors">Layout</a>
+      <a href="#motion" class="hover:text-brand-cream transition-colors">Motion</a>
+      <a href="#icons" class="hover:text-brand-cream transition-colors">Icons</a>
+    </nav>
+    <a class="group magnetic flex items-center gap-3 bg-brand-cream text-brand-bg px-5 py-3 hover:bg-white transition-colors" href="#components">
+      <span class="text-xs tracking-[0.15em] font-medium uppercase">Components</span>
+      <iconify-icon class="text-base transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" icon="solar:arrow-right-up-linear"></iconify-icon>
+    </a>
+  </div>
+</header>
+
+
+<!-- ══════════════════════════════════
+     0) HERO — EXACT CLONE, TEXT ADAPTED
+══════════════════════════════════ -->
+<section class="relative h-screen w-full overflow-hidden" id="top">
+
+  <!-- Right background image -->
+  <div class="absolute inset-0 z-0 flex justify-end overflow-hidden">
+    <img alt="" class="gsap-bg-img h-full w-auto max-w-none object-cover object-left opacity-0" src="assets/fb736cce9f57f5f8_1600w.jpg"/>
+  </div>
+
+  <!-- SVG curve + beam overlay -->
+  <svg class="absolute inset-0 w-full h-full pointer-events-none drop-shadow-[20px_0_30px_rgba(0,0,0,0.9)]" preserveAspectRatio="none" viewBox="0 0 100 100">
+    <defs>
+      <linearGradient id="beamGrad" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0%" stop-color="rgba(197,166,124,0)"/>
+        <stop offset="40%" stop-color="rgba(197,166,124,0.9)"/>
+        <stop offset="60%" stop-color="rgba(234,228,216,0.95)"/>
+        <stop offset="100%" stop-color="rgba(197,166,124,0)"/>
+      </linearGradient>
+    </defs>
+    <path class="gsap-curve" d="M0,0 L0,100 L55,100 Q75,50 55,0 Z" fill="#050505"></path>
+    <path class="hero-beam" d="M55,0 Q75,50 55,100" fill="none" pathLength="100" stroke="url(#beamGrad)" stroke-dasharray="22 78" stroke-linecap="round" stroke-width="0.2" style="filter:drop-shadow(0 0 2px rgba(197,166,124,0.9));animation-delay:2s"></path>
+  </svg>
+
+  <!-- Left content -->
+  <div class="relative z-10 h-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col justify-center">
+
+    <!-- Badge -->
+    <div class="gsap-element flex items-center gap-3 mb-8">
+      <span class="text-xs tracking-[0.3em] text-brand-gold uppercase font-mono">Design System</span>
+      <iconify-icon class="text-brand-muted text-xs" icon="solar:close-linear"></iconify-icon>
+      <span class="text-xs tracking-[0.3em] text-brand-gold uppercase font-mono">Component Library</span>
+    </div>
+
+    <!-- H1 -->
+    <h1 class="font-serif tracking-tight text-[clamp(2.5rem,6.5vw,6rem)] leading-[0.9] text-brand-cream mb-10 select-none" data-hero-letters="true">
+      <div class="overflow-hidden py-1"><div class="gsap-text">Design</div></div>
+      <div class="overflow-hidden py-1"><div class="gsap-text">System &amp;</div></div>
+      <div class="overflow-hidden py-1"><div class="gsap-text">Pattern Library.</div></div>
+    </h1>
+
+    <!-- Divider -->
+    <div class="gsap-element flex items-center gap-4 mb-8 w-64 opacity-50">
+      <div class="h-px flex-1 bg-gradient-to-r from-brand-muted to-transparent"></div>
+      <iconify-icon class="text-brand-gold text-sm" icon="solar:shield-check-linear"></iconify-icon>
+      <div class="h-px flex-1 bg-gradient-to-l from-brand-muted to-transparent"></div>
+    </div>
+
+    <!-- Paragraph -->
+    <p class="gsap-element text-sm md:text-base text-brand-muted max-w-md leading-relaxed mb-12">
+      Every token, animation, and pattern documented — the exact design language of Sequra made legible, reusable, and precise.
+    </p>
+
+    <!-- CTA buttons -->
+    <div class="gsap-element flex flex-wrap items-center gap-8">
+      <a class="relative group magnetic overflow-hidden bg-brand-cream text-brand-bg px-6 py-4 flex items-center gap-4 transition-all duration-300 hover:bg-white" href="#typography">
+        <span class="text-xs tracking-[0.15em] font-medium uppercase relative z-10">Explore Tokens</span>
+        <iconify-icon class="text-lg relative z-10 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" icon="solar:arrow-right-up-linear"></iconify-icon>
+        <div class="absolute inset-0 bg-gradient-to-tr from-brand-gold/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+      </a>
+      <a class="group flex items-center gap-3 text-brand-muted hover:text-brand-cream transition-colors duration-300" href="#components">
+        <span class="text-xs tracking-[0.15em] font-medium uppercase">View Components</span>
+        <iconify-icon class="text-lg transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" icon="solar:arrow-right-up-linear"></iconify-icon>
+      </a>
+    </div>
+  </div>
+
+  <!-- Bottom stats -->
+  <div class="gsap-element absolute bottom-10 left-0 right-0 z-10 max-w-7xl mx-auto px-6 md:px-10">
+    <div class="flex flex-wrap items-end gap-12 md:gap-16 border-t border-white/5 pt-8 max-w-2xl">
+      <div class="flex flex-col gap-2">
+        <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono">Design Tokens</span>
+        <div class="flex items-baseline gap-1">
+          <span class="font-serif text-4xl text-brand-gold" data-count="240">240</span>
+          <span class="font-serif text-xl text-brand-gold">+</span>
+        </div>
+        <div class="w-4 h-px bg-brand-muted mt-1"></div>
+      </div>
+      <div class="flex flex-col gap-2">
+        <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono">Components</span>
+        <div class="flex items-baseline gap-1">
+          <span class="font-serif text-4xl text-brand-gold" data-count="18">18</span>
+          <span class="font-serif text-xl text-brand-gold">+</span>
+        </div>
+        <div class="w-4 h-px bg-brand-muted mt-1"></div>
+      </div>
+      <div class="flex flex-col gap-2">
+        <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono">Animated</span>
+        <div class="flex items-baseline gap-1">
+          <span class="font-serif text-4xl text-brand-gold" data-count="100" data-decimals="0">100</span>
+          <span class="font-serif text-xl text-brand-gold">%</span>
+        </div>
+        <div class="w-4 h-px bg-brand-muted mt-1"></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ══════════════════════════════════
+     1) TYPOGRAPHY
+══════════════════════════════════ -->
+<section class="relative z-10 max-w-7xl mx-auto px-6 md:px-10 py-28 md:py-36 ds-section-rule" id="typography">
+
+  <div class="reveal flex items-center gap-3 mb-6">
+    <span class="text-xs tracking-[0.3em] text-brand-gold uppercase font-mono">/ 01</span>
+    <iconify-icon class="text-brand-muted text-xs" icon="solar:close-linear"></iconify-icon>
+    <span class="text-xs tracking-[0.25em] text-brand-muted uppercase font-mono">Typography</span>
+  </div>
+
+  <h2 class="reveal font-serif tracking-tight text-[clamp(2rem,4.5vw,4rem)] leading-[1] mb-16 max-w-3xl">
+    Type scale that communicates
+    <span class="italic text-brand-gold">hierarchy &amp; rhythm</span>.
+  </h2>
+
+  <!-- Spec table -->
+  <div class="flex flex-col border-t border-white/5">
+
+    <!-- Heading 1 -->
+    <div class="reveal flex items-center justify-between py-8 border-b border-white/5 gap-6 flex-wrap md:flex-nowrap">
+      <div class="flex-shrink-0 w-28">
+        <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono block">Heading 1</span>
+        <span class="text-[0.6rem] tracking-[0.15em] text-brand-gold/60 uppercase font-mono block mt-1">font-serif</span>
+      </div>
+      <div class="flex-1 overflow-hidden px-4 min-w-0">
+        <h1 class="font-serif tracking-tight text-[clamp(2.5rem,6.5vw,6rem)] leading-[0.9] text-brand-cream truncate">Design System</h1>
+      </div>
+      <div class="flex-shrink-0 text-right">
+        <span class="text-[0.65rem] tracking-[0.2em] text-brand-gold uppercase font-mono block">clamp(2.5rem, 6.5vw, 6rem)</span>
+        <span class="text-[0.6rem] tracking-[0.15em] text-brand-muted uppercase font-mono block mt-1">leading-[0.9] · tracking-tight</span>
+      </div>
+    </div>
+
+    <!-- Heading 2 -->
+    <div class="reveal flex items-center justify-between py-8 border-b border-white/5 gap-6 flex-wrap md:flex-nowrap">
+      <div class="flex-shrink-0 w-28">
+        <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono block">Heading 2</span>
+        <span class="text-[0.6rem] tracking-[0.15em] text-brand-gold/60 uppercase font-mono block mt-1">font-serif</span>
+      </div>
+      <div class="flex-1 overflow-hidden px-4 min-w-0">
+        <h2 class="font-serif tracking-tight text-[clamp(2rem,4.5vw,4rem)] leading-[1] text-brand-cream truncate">Capabilities engineered</h2>
+      </div>
+      <div class="flex-shrink-0 text-right">
+        <span class="text-[0.65rem] tracking-[0.2em] text-brand-gold uppercase font-mono block">clamp(2rem, 4.5vw, 4rem)</span>
+        <span class="text-[0.6rem] tracking-[0.15em] text-brand-muted uppercase font-mono block mt-1">leading-[1] · tracking-tight</span>
+      </div>
+    </div>
+
+    <!-- Heading 3 — Card title -->
+    <div class="reveal flex items-center justify-between py-8 border-b border-white/5 gap-6 flex-wrap md:flex-nowrap">
+      <div class="flex-shrink-0 w-28">
+        <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono block">Heading 3</span>
+        <span class="text-[0.6rem] tracking-[0.15em] text-brand-gold/60 uppercase font-mono block mt-1">font-sans</span>
+      </div>
+      <div class="flex-1 overflow-hidden px-4 min-w-0">
+        <h3 class="text-base tracking-wide uppercase font-medium text-brand-cream">Unified Treasury</h3>
+      </div>
+      <div class="flex-shrink-0 text-right">
+        <span class="text-[0.65rem] tracking-[0.2em] text-brand-gold uppercase font-mono block">16px / 1.5</span>
+        <span class="text-[0.6rem] tracking-[0.15em] text-brand-muted uppercase font-mono block mt-1">tracking-wide · uppercase · medium</span>
+      </div>
+    </div>
+
+    <!-- Heading 4 — Section label -->
+    <div class="reveal flex items-center justify-between py-8 border-b border-white/5 gap-6 flex-wrap md:flex-nowrap">
+      <div class="flex-shrink-0 w-28">
+        <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono block">Heading 4</span>
+        <span class="text-[0.6rem] tracking-[0.15em] text-brand-gold/60 uppercase font-mono block mt-1">font-mono</span>
+      </div>
+      <div class="flex-1 overflow-hidden px-4 min-w-0">
+        <h4 class="text-[0.65rem] tracking-[0.2em] uppercase font-mono text-brand-muted">Navigation &amp; Labels</h4>
+      </div>
+      <div class="flex-shrink-0 text-right">
+        <span class="text-[0.65rem] tracking-[0.2em] text-brand-gold uppercase font-mono block">0.65rem / auto</span>
+        <span class="text-[0.6rem] tracking-[0.15em] text-brand-muted uppercase font-mono block mt-1">tracking-[0.2em] · uppercase</span>
+      </div>
+    </div>
+
+    <!-- Bold L — Serif stat -->
+    <div class="reveal flex items-center justify-between py-8 border-b border-white/5 gap-6 flex-wrap md:flex-nowrap">
+      <div class="flex-shrink-0 w-28">
+        <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono block">Bold L</span>
+        <span class="text-[0.6rem] tracking-[0.15em] text-brand-gold/60 uppercase font-mono block mt-1">font-serif</span>
+      </div>
+      <div class="flex-1 overflow-hidden px-4 min-w-0 flex items-baseline gap-1">
+        <span class="font-serif text-4xl text-brand-gold">$48</span>
+        <span class="font-serif text-xl text-brand-gold">B+</span>
+      </div>
+      <div class="flex-shrink-0 text-right">
+        <span class="text-[0.65rem] tracking-[0.2em] text-brand-gold uppercase font-mono block">36px / 2.5rem</span>
+        <span class="text-[0.6rem] tracking-[0.15em] text-brand-muted uppercase font-mono block mt-1">stat counter · gold accent</span>
+      </div>
+    </div>
+
+    <!-- Bold M — Story serif -->
+    <div class="reveal flex items-center justify-between py-8 border-b border-white/5 gap-6 flex-wrap md:flex-nowrap">
+      <div class="flex-shrink-0 w-28">
+        <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono block">Bold M</span>
+        <span class="text-[0.6rem] tracking-[0.15em] text-brand-gold/60 uppercase font-mono block mt-1">font-serif</span>
+      </div>
+      <div class="flex-1 overflow-hidden px-4 min-w-0">
+        <p class="font-serif text-2xl md:text-3xl leading-snug text-brand-cream">Watch your capital move with clarity.</p>
+      </div>
+      <div class="flex-shrink-0 text-right">
+        <span class="text-[0.65rem] tracking-[0.2em] text-brand-gold uppercase font-mono block">24px–30px / 1.375</span>
+        <span class="text-[0.6rem] tracking-[0.15em] text-brand-muted uppercase font-mono block mt-1">leading-snug · story captions</span>
+      </div>
+    </div>
+
+    <!-- Bold S — Nav label -->
+    <div class="reveal flex items-center justify-between py-8 border-b border-white/5 gap-6 flex-wrap md:flex-nowrap">
+      <div class="flex-shrink-0 w-28">
+        <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono block">Bold S</span>
+        <span class="text-[0.6rem] tracking-[0.15em] text-brand-gold/60 uppercase font-mono block mt-1">font-sans</span>
+      </div>
+      <div class="flex-1 overflow-hidden px-4 min-w-0">
+        <span class="text-sm tracking-[0.35em] font-medium uppercase text-brand-cream">SEQURA FINANCIAL</span>
+      </div>
+      <div class="flex-shrink-0 text-right">
+        <span class="text-[0.65rem] tracking-[0.2em] text-brand-gold uppercase font-mono block">14px / auto</span>
+        <span class="text-[0.6rem] tracking-[0.15em] text-brand-muted uppercase font-mono block mt-1">tracking-[0.35em] · medium · nav</span>
+      </div>
+    </div>
+
+    <!-- Regular L — Body -->
+    <div class="reveal flex items-center justify-between py-8 border-b border-white/5 gap-6 flex-wrap md:flex-nowrap">
+      <div class="flex-shrink-0 w-28">
+        <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono block">Regular L</span>
+        <span class="text-[0.6rem] tracking-[0.15em] text-brand-gold/60 uppercase font-mono block mt-1">font-sans</span>
+      </div>
+      <div class="flex-1 overflow-hidden px-4 min-w-0 max-w-lg">
+        <p class="text-sm md:text-base text-brand-muted leading-relaxed">An intelligent financial layer — so finance teams move capital with precision, not guesswork.</p>
+      </div>
+      <div class="flex-shrink-0 text-right">
+        <span class="text-[0.65rem] tracking-[0.2em] text-brand-gold uppercase font-mono block">14px–16px / 1.625</span>
+        <span class="text-[0.6rem] tracking-[0.15em] text-brand-muted uppercase font-mono block mt-1">leading-relaxed · light · body</span>
+      </div>
+    </div>
+
+    <!-- Regular M — Card body -->
+    <div class="reveal flex items-center justify-between py-8 border-b border-white/5 gap-6 flex-wrap md:flex-nowrap">
+      <div class="flex-shrink-0 w-28">
+        <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono block">Regular M</span>
+        <span class="text-[0.6rem] tracking-[0.15em] text-brand-gold/60 uppercase font-mono block mt-1">font-sans</span>
+      </div>
+      <div class="flex-1 overflow-hidden px-4 min-w-0 max-w-lg">
+        <p class="text-[13px] leading-relaxed text-brand-muted">See every account, currency, and balance in one live view. Reconcile in minutes, not days.</p>
+      </div>
+      <div class="flex-shrink-0 text-right">
+        <span class="text-[0.65rem] tracking-[0.2em] text-brand-gold uppercase font-mono block">13px / 1.625</span>
+        <span class="text-[0.6rem] tracking-[0.15em] text-brand-muted uppercase font-mono block mt-1">card body · pricing copy</span>
+      </div>
+    </div>
+
+    <!-- Regular S — Mono label -->
+    <div class="reveal flex items-center justify-between py-8 border-b border-white/5 gap-6 flex-wrap md:flex-nowrap">
+      <div class="flex-shrink-0 w-28">
+        <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono block">Regular S</span>
+        <span class="text-[0.6rem] tracking-[0.15em] text-brand-gold/60 uppercase font-mono block mt-1">font-mono</span>
+      </div>
+      <div class="flex-1 overflow-hidden px-4 min-w-0">
+        <span class="text-xs tracking-[0.3em] text-brand-gold uppercase font-mono">/ 01 · Pattern Library · Design System</span>
+      </div>
+      <div class="flex-shrink-0 text-right">
+        <span class="text-[0.65rem] tracking-[0.2em] text-brand-gold uppercase font-mono block">12px / auto</span>
+        <span class="text-[0.6rem] tracking-[0.15em] text-brand-muted uppercase font-mono block mt-1">tracking-[0.3em] · gold mono labels</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     2) COLORS & SURFACES
+══════════════════════════════════ -->
+<section class="relative z-10 max-w-7xl mx-auto px-6 md:px-10 py-28 md:py-36 ds-section-rule" id="colors">
+
+  <div class="reveal flex items-center gap-3 mb-6">
+    <span class="text-xs tracking-[0.3em] text-brand-gold uppercase font-mono">/ 02</span>
+    <iconify-icon class="text-brand-muted text-xs" icon="solar:close-linear"></iconify-icon>
+    <span class="text-xs tracking-[0.25em] text-brand-muted uppercase font-mono">Colors &amp; Surfaces</span>
+  </div>
+
+  <h2 class="reveal font-serif tracking-tight text-[clamp(2rem,4.5vw,4rem)] leading-[1] mb-16 max-w-3xl">
+    A palette forged in
+    <span class="italic text-brand-gold">darkness &amp; gold</span>.
+  </h2>
+
+  <!-- Core palette -->
+  <h3 class="text-sm tracking-[0.15em] uppercase font-medium mb-8 text-brand-cream">Core Palette</h3>
+  <div class="reveal grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+    <div>
+      <div class="h-20 w-full mb-3 border border-white/10" style="background:#050505"></div>
+      <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono block">Brand BG</span>
+      <span class="text-[0.6rem] tracking-[0.15em] text-brand-gold uppercase font-mono block mt-0.5">#050505</span>
+      <span class="text-[0.6rem] text-brand-muted font-mono block mt-0.5">Page bg · nav bg</span>
+    </div>
+    <div>
+      <div class="h-20 w-full mb-3" style="background:#111111"></div>
+      <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono block">Brand Dark</span>
+      <span class="text-[0.6rem] tracking-[0.15em] text-brand-gold uppercase font-mono block mt-0.5">#111111</span>
+      <span class="text-[0.6rem] text-brand-muted font-mono block mt-0.5">Card overlay · text on light</span>
+    </div>
+    <div>
+      <div class="h-20 w-full mb-3" style="background:#eae4d8"></div>
+      <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono block">Brand Cream</span>
+      <span class="text-[0.6rem] tracking-[0.15em] text-brand-gold uppercase font-mono block mt-0.5">#eae4d8</span>
+      <span class="text-[0.6rem] text-brand-muted font-mono block mt-0.5">Primary text · CTA bg</span>
+    </div>
+    <div>
+      <div class="h-20 w-full mb-3" style="background:#c5a67c"></div>
+      <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono block">Brand Gold</span>
+      <span class="text-[0.6rem] tracking-[0.15em] text-brand-gold uppercase font-mono block mt-0.5">#c5a67c</span>
+      <span class="text-[0.6rem] text-brand-muted font-mono block mt-0.5">Accent · icons · dividers</span>
+    </div>
+    <div>
+      <div class="h-20 w-full mb-3" style="background:#7a7a7a"></div>
+      <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono block">Brand Muted</span>
+      <span class="text-[0.6rem] tracking-[0.15em] text-brand-gold uppercase font-mono block mt-0.5">#7a7a7a</span>
+      <span class="text-[0.6rem] text-brand-muted font-mono block mt-0.5">Secondary text · nav links</span>
+    </div>
+    <div>
+      <div class="h-20 w-full mb-3" style="background:#f3efe6"></div>
+      <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono block">Light Surface</span>
+      <span class="text-[0.6rem] tracking-[0.15em] text-brand-gold uppercase font-mono block mt-0.5">#f3efe6</span>
+      <span class="text-[0.6rem] text-brand-muted font-mono block mt-0.5">Feature cards · light sections</span>
+    </div>
+    <div>
+      <div class="h-20 w-full mb-3" style="background:#ebe5d8"></div>
+      <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono block">Surface Hover</span>
+      <span class="text-[0.6rem] tracking-[0.15em] text-brand-gold uppercase font-mono block mt-0.5">#ebe5d8</span>
+      <span class="text-[0.6rem] text-brand-muted font-mono block mt-0.5">hover:bg-[#ebe5d8]</span>
+    </div>
+    <div>
+      <div class="h-20 w-full mb-3" style="background:#7a6f5c"></div>
+      <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono block">Dark Gold</span>
+      <span class="text-[0.6rem] tracking-[0.15em] text-brand-gold uppercase font-mono block mt-0.5">#7a6f5c</span>
+      <span class="text-[0.6rem] text-brand-muted font-mono block mt-0.5">Muted gold on light bg</span>
+    </div>
+  </div>
+
+  <!-- Gradients -->
+  <h3 class="text-sm tracking-[0.15em] uppercase font-medium mb-8 text-brand-cream">Gradients &amp; Overlays</h3>
+  <div class="reveal grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+    <div>
+      <div class="h-20 w-full mb-3" style="background:linear-gradient(135deg,rgba(197,166,124,.4),rgba(0,0,0,.2))"></div>
+      <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono block">Featured Card Border</span>
+      <span class="text-[0.6rem] text-brand-muted font-mono block mt-0.5">from-brand-gold/40 via-brand-gold/10 to-transparent</span>
+    </div>
+    <div>
+      <div class="h-20 w-full mb-3" style="background:linear-gradient(to right,#c5a67c,#eae4d8)"></div>
+      <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono block">Gold → Cream</span>
+      <span class="text-[0.6rem] text-brand-muted font-mono block mt-0.5">from-brand-gold to-brand-cream · scroll bar</span>
+    </div>
+    <div>
+      <div class="h-20 w-full mb-3 backdrop-blur-md" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08)"></div>
+      <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono block">Glass Overlay</span>
+      <span class="text-[0.6rem] text-brand-muted font-mono block mt-0.5">bg-white/5 backdrop-blur-md border-white/8</span>
+    </div>
+  </div>
+
+  <!-- Borders & Dividers -->
+  <h3 class="text-sm tracking-[0.15em] uppercase font-medium mb-8 text-brand-cream">Borders &amp; Dividers</h3>
+  <div class="reveal flex flex-col gap-4">
+    <div class="flex items-center gap-6">
+      <div class="flex-1 h-px border-t border-white/5"></div>
+      <span class="text-[0.6rem] font-mono text-brand-muted flex-shrink-0">border-white/5 — section dividers</span>
+    </div>
+    <div class="flex items-center gap-6">
+      <div class="flex-1 h-px border-t border-white/10"></div>
+      <span class="text-[0.6rem] font-mono text-brand-muted flex-shrink-0">border-white/10 — card borders</span>
+    </div>
+    <div class="flex items-center gap-6">
+      <div class="flex-1 h-px" style="background:linear-gradient(to right,#7a7a7a,transparent)"></div>
+      <span class="text-[0.6rem] font-mono text-brand-muted flex-shrink-0">from-brand-muted to-transparent — divider ornament</span>
+    </div>
+    <div class="flex items-center gap-6">
+      <div class="flex-1 h-px" style="border:1px solid rgba(197,166,124,0.5)"></div>
+      <span class="text-[0.6rem] font-mono text-brand-muted flex-shrink-0">border-brand-gold/50 — featured card hover border</span>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ══════════════════════════════════
+     3) UI COMPONENTS
+══════════════════════════════════ -->
+<section class="relative z-10 max-w-7xl mx-auto px-6 md:px-10 py-28 md:py-36 ds-section-rule" id="components">
+
+  <div class="reveal flex items-center gap-3 mb-6">
+    <span class="text-xs tracking-[0.3em] text-brand-gold uppercase font-mono">/ 03</span>
+    <iconify-icon class="text-brand-muted text-xs" icon="solar:close-linear"></iconify-icon>
+    <span class="text-xs tracking-[0.25em] text-brand-muted uppercase font-mono">UI Components</span>
+  </div>
+
+  <h2 class="reveal font-serif tracking-tight text-[clamp(2rem,4.5vw,4rem)] leading-[1] mb-16 max-w-3xl">
+    Precision
+    <span class="italic text-brand-gold">components</span> in every state.
+  </h2>
+
+  <!-- ── Buttons ── -->
+  <div class="reveal mb-16">
+    <h3 class="text-sm tracking-[0.15em] uppercase font-medium mb-8 text-brand-cream">Buttons</h3>
+    <div class="grid md:grid-cols-2 gap-4">
+
+      <!-- Primary CTA -->
+      <div class="border border-white/5 p-6 rounded bg-black/20">
+        <span class="state-label">Primary CTA — Default / Hover</span>
+        <div class="flex flex-wrap gap-6 items-center">
+          <a href="#" class="relative group magnetic overflow-hidden bg-brand-cream text-brand-bg px-6 py-4 flex items-center gap-4 transition-all duration-300 hover:bg-white" onclick="return false">
+            <span class="text-xs tracking-[0.15em] font-medium uppercase relative z-10">Start Now</span>
+            <iconify-icon class="text-lg relative z-10 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" icon="solar:arrow-right-up-linear"></iconify-icon>
+            <div class="absolute inset-0 bg-gradient-to-tr from-brand-gold/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+          </a>
+          <span class="text-[0.6rem] font-mono text-brand-muted">bg-brand-cream · magnetic · gradient hover overlay</span>
+        </div>
+      </div>
+
+      <!-- Nav CTA -->
+      <div class="border border-white/5 p-6 rounded bg-black/20">
+        <span class="state-label">Nav CTA — Default / Hover</span>
+        <div class="flex flex-wrap gap-6 items-center">
+          <a href="#" class="group magnetic flex items-center gap-3 bg-brand-cream text-brand-bg px-5 py-3 hover:bg-white transition-colors" onclick="return false">
+            <span class="text-xs tracking-[0.15em] font-medium uppercase">Get Access</span>
+            <iconify-icon class="text-base transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" icon="solar:arrow-right-up-linear"></iconify-icon>
+          </a>
+          <span class="text-[0.6rem] font-mono text-brand-muted">px-5 py-3 · nav header variant</span>
+        </div>
+      </div>
+
+      <!-- Ghost link -->
+      <div class="border border-white/5 p-6 rounded bg-black/20">
+        <span class="state-label">Ghost Link — Default / Hover</span>
+        <div class="flex flex-wrap gap-6 items-center">
+          <a href="#" class="group flex items-center gap-3 text-brand-muted hover:text-brand-cream transition-colors duration-300" onclick="return false">
+            <span class="text-xs tracking-[0.15em] font-medium uppercase">Explore Platform</span>
+            <iconify-icon class="text-lg transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" icon="solar:arrow-right-up-linear"></iconify-icon>
+          </a>
+          <span class="text-[0.6rem] font-mono text-brand-muted">text-brand-muted → cream · arrow translate</span>
+        </div>
+      </div>
+
+      <!-- Pricing outline button -->
+      <div class="border border-white/5 p-6 rounded bg-black/20">
+        <span class="state-label">Outline Button — Default / Hover / Featured</span>
+        <div class="flex flex-col gap-3">
+          <a href="#" class="group flex items-center justify-between rounded border border-white/10 px-5 py-3 hover:border-brand-gold/50 transition-all duration-300" onclick="return false">
+            <span class="text-[13px] font-medium">Start Free</span>
+            <iconify-icon class="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" icon="solar:arrow-right-up-linear"></iconify-icon>
+          </a>
+          <a href="#" class="group flex items-center justify-between rounded bg-brand-cream text-brand-bg px-5 py-3 hover:bg-white transition-all duration-300" onclick="return false">
+            <span class="text-[13px] font-medium">Start Trial</span>
+            <iconify-icon class="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" icon="solar:arrow-right-up-linear"></iconify-icon>
+          </a>
+        </div>
+      </div>
+
+      <!-- Form submit button -->
+      <div class="border border-white/5 p-6 rounded bg-black/20 md:col-span-2">
+        <span class="state-label">Form Submit Button — Default / Hover</span>
+        <div class="flex flex-wrap gap-6 items-center">
+          <button class="group magnetic flex items-center justify-center gap-4 bg-brand-cream text-brand-bg px-6 py-4 hover:bg-white transition-colors" onclick="return false">
+            <span class="text-xs tracking-[0.15em] font-medium uppercase">Send Message</span>
+            <iconify-icon class="text-lg transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" icon="solar:arrow-right-up-linear"></iconify-icon>
+          </button>
+          <span class="text-[0.6rem] font-mono text-brand-muted">Full-width context · form submit · magnetic</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Inputs ── -->
+  <div class="reveal mb-16">
+    <h3 class="text-sm tracking-[0.15em] uppercase font-medium mb-8 text-brand-cream">Inputs</h3>
+    <div class="grid md:grid-cols-3 gap-6" style="background-color: rgb(234, 228, 216); padding: 2rem; margin-bottom: 1rem;">
+      <div>
+        <span class="state-label" style="color:#7a6f5c">Default</span>
+        <input class="w-full bg-transparent border border-black/15 px-5 py-4 text-sm text-[#111111] placeholder:text-[#7a7a7a] focus:border-brand-gold/60 focus:outline-none transition-colors" placeholder="Full name" type="text"/>
+      </div>
+      <div>
+        <span class="state-label" style="color:#7a6f5c">Focus State</span>
+        <input class="w-full bg-transparent border px-5 py-4 text-sm text-[#111111] placeholder:text-[#7a7a7a] focus:outline-none transition-colors" placeholder="Work email" type="email" style="border-color:rgba(197,166,124,.6);box-shadow:0 0 0 1px rgba(197,166,124,.4),0 8px 30px -12px rgba(197,166,124,.3);transform:translateY(-1px)"/>
+      </div>
+      <div>
+        <span class="state-label" style="color:#7a6f5c">Textarea</span>
+        <textarea class="w-full bg-transparent border border-black/15 px-5 py-4 text-sm text-[#111111] placeholder:text-[#7a7a7a] focus:border-brand-gold/60 focus:outline-none transition-colors resize-none" placeholder="What are you trying to solve?" rows="3"></textarea>
+      </div>
+    </div>
+    <p class="text-[0.6rem] font-mono text-brand-muted mt-3">bg-transparent · border-black/15 · focus:border-brand-gold/60 · light section background (#eae4d8)</p>
+  </div>
+
+  <!-- ── Cards ── -->
+  <div class="reveal mb-16">
+    <h3 class="text-sm tracking-[0.15em] uppercase font-medium mb-8 text-brand-cream">Cards &amp; Surfaces</h3>
+    <div class="grid md:grid-cols-3 gap-4">
+
+      <!-- Feature card (light) -->
+      <div class="feat-section">
+        <div class="reveal group bg-[#f3efe6] p-8 transition-colors duration-500 hover:bg-[#ebe5d8]">
+          <iconify-icon class="text-brand-gold text-3xl mb-6" icon="solar:wallet-money-linear"></iconify-icon>
+          <h3 class="text-base tracking-wide uppercase font-medium mb-3 text-[#111111]">Unified Treasury</h3>
+          <p class="text-sm text-[#5a5a5a] leading-relaxed">See every account, currency, and balance in one live view.</p>
+        </div>
+      </div>
+
+      <!-- Pricing card (dark gradient) -->
+      <div class="rounded p-px bg-gradient-to-b from-brand-gold/40 via-brand-gold/10 to-transparent" style="box-shadow:0 0 20px 0 rgba(197,166,124,0.3)">
+        <div class="rounded-[3px] bg-brand-dark/60 p-8 flex flex-col h-full relative">
+          <span class="absolute -top-3 left-8 rounded bg-brand-gold text-brand-bg text-[10px] tracking-[0.1em] uppercase font-sans px-3 py-1">Most Popular</span>
+          <span class="text-[10px] tracking-[0.1em] uppercase font-sans text-brand-gold mb-6">Growth</span>
+          <div class="flex items-baseline gap-1 mb-2">
+            <span class="font-sans font-light text-5xl tracking-tight text-brand-cream">$299</span>
+            <span class="text-sm text-brand-muted">/mo</span>
+          </div>
+          <ul class="flex flex-col gap-3 text-[13px] text-brand-muted mt-4">
+            <li class="flex items-center gap-3"><iconify-icon class="text-brand-gold" icon="solar:check-circle-linear"></iconify-icon>All Core features</li>
+            <li class="flex items-center gap-3"><iconify-icon class="text-brand-gold" icon="solar:check-circle-linear"></iconify-icon>Priority support</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Glass card (dark) -->
+      <div class="p-8 rounded-2xl overflow-hidden relative" style="background:linear-gradient(rgb(21,21,21) 0%,rgb(5,5,5) 100%);box-shadow:rgba(255,255,255,0.08) 0px 1px 0px inset,rgba(0,0,0,0.8) 0px 30px 60px -20px">
+        <div class="flex items-center gap-3 rounded-xl bg-brand-dark/80 backdrop-blur-md px-4 py-2.5 pr-5 w-max mb-4" style="box-shadow:0 1px 0 rgba(255,255,255,.08) inset,0 8px 24px -10px rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.08)">
+          <span class="grid place-items-center w-6 h-6 text-brand-gold">
+            <iconify-icon icon="solar:widget-5-linear" width="18" height="18"></iconify-icon>
+          </span>
+          <span class="text-base font-medium tracking-tight text-brand-cream">Sequra Engine</span>
+          <span class="text-xs text-brand-muted tracking-widest font-mono pl-2">/ 003</span>
+        </div>
+        <p class="text-[0.6rem] font-mono text-brand-muted mt-2">Dark canvas card · glass pill inside · showcase container</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Testimonial card ── -->
+  <div class="reveal mb-16">
+    <h3 class="text-sm tracking-[0.15em] uppercase font-medium mb-8 text-brand-cream">Testimonial Card</h3>
+    <div class="grid md:grid-cols-3 gap-px bg-black/5" style="background-color:rgb(234,228,216)">
+      <figure class="bg-[#f3efe6] p-8 flex flex-col justify-between">
+        <p class="font-serif text-xl leading-snug mb-8 text-[#111111]">"Sequra cut our reconciliation time from three days to under an hour."</p>
+        <figcaption class="flex items-center gap-3">
+          <img alt="" class="w-10 h-10 rounded-full object-cover" src="assets/511e8a28ad384d16_80.jpg"/>
+          <div>
+            <p class="text-sm text-[#111111]">Elena Marsh</p>
+            <p class="text-xs text-[#5a5a5a] font-mono">CFO, NovaCorp</p>
+          </div>
+        </figcaption>
+      </figure>
+      <figure class="bg-[#f3efe6] p-8 flex flex-col justify-between">
+        <p class="font-serif text-xl leading-snug mb-8 text-[#111111]">"Real-time visibility changed how our board views treasury strategy entirely."</p>
+        <figcaption class="flex items-center gap-3">
+          <img alt="" class="w-10 h-10 rounded-full object-cover" src="assets/6bfe57db510ea4a7_80.jpg"/>
+          <div>
+            <p class="text-sm text-[#111111]">David Okoye</p>
+            <p class="text-xs text-[#5a5a5a] font-mono">VP Finance, Meridian</p>
+          </div>
+        </figcaption>
+      </figure>
+      <figure class="bg-[#f3efe6] p-8 flex flex-col justify-between">
+        <p class="font-serif text-xl leading-snug mb-8 text-[#111111]">"The API integrations alone saved us four full-time headcount in ops."</p>
+        <figcaption class="flex items-center gap-3">
+          <img alt="" class="w-10 h-10 rounded-full object-cover" src="assets/93a1ee3f10b9da51_80.jpg"/>
+          <div>
+            <p class="text-sm text-[#111111]">Mira Castellanos</p>
+            <p class="text-xs text-[#5a5a5a] font-mono">CTO, Helix Capital</p>
+          </div>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ══════════════════════════════════
+     4) LAYOUT & SPACING
+══════════════════════════════════ -->
+<section class="relative z-10 max-w-7xl mx-auto px-6 md:px-10 py-28 md:py-36 ds-section-rule" id="layout">
+
+  <div class="reveal flex items-center gap-3 mb-6">
+    <span class="text-xs tracking-[0.3em] text-brand-gold uppercase font-mono">/ 04</span>
+    <iconify-icon class="text-brand-muted text-xs" icon="solar:close-linear"></iconify-icon>
+    <span class="text-xs tracking-[0.25em] text-brand-muted uppercase font-mono">Layout &amp; Spacing</span>
+  </div>
+
+  <h2 class="reveal font-serif tracking-tight text-[clamp(2rem,4.5vw,4rem)] leading-[1] mb-16 max-w-3xl">
+    Structural
+    <span class="italic text-brand-gold">patterns</span>.
+  </h2>
+
+  <div class="flex flex-col gap-12">
+
+    <!-- Main container -->
+    <div class="reveal">
+      <span class="state-label">Main Container</span>
+      <div class="border border-dashed border-brand-gold/30 px-6 md:px-10 py-6 text-center text-brand-muted text-xs font-mono">
+        max-w-7xl mx-auto px-6 md:px-10 — 80rem max-width, 24px/40px gutters
+      </div>
+    </div>
+
+    <!-- Feature grid (3 col) -->
+    <div class="reveal">
+      <span class="state-label">Feature Grid — grid md:grid-cols-3 gap-px bg-black/5</span>
+      <div class="grid md:grid-cols-3 gap-px bg-black/5">
+        <div class="bg-brand-bg border border-white/5 p-6 text-center text-xs font-mono text-brand-muted">Col 1<br/><span class="text-brand-gold/60">p-8 · reveal · group hover</span></div>
+        <div class="bg-brand-bg border border-white/5 p-6 text-center text-xs font-mono text-brand-muted">Col 2<br/><span class="text-brand-gold/60">icon + h3 + p</span></div>
+        <div class="bg-brand-bg border border-white/5 p-6 text-center text-xs font-mono text-brand-muted">Col 3<br/><span class="text-brand-gold/60">3 or 6 column variants</span></div>
+      </div>
+      <p class="text-[0.6rem] font-mono text-brand-muted mt-3">Used in: Features, Testimonials (3-col) — 1px gap creates hairline divider effect via parent bg</p>
+    </div>
+
+    <!-- 2-col split layout -->
+    <div class="reveal">
+      <span class="state-label">2-Column Split — grid md:grid-cols-2 gap-16 (Contact section)</span>
+      <div class="grid md:grid-cols-2 gap-px bg-black/5">
+        <div class="bg-brand-bg border border-white/5 p-6 text-xs font-mono text-brand-muted">
+          <span class="text-brand-gold block mb-2">Left: Content</span>
+          label badge · h2 · paragraph · contact details
+        </div>
+        <div class="bg-brand-bg border border-white/5 p-6 text-xs font-mono text-brand-muted">
+          <span class="text-brand-gold block mb-2">Right: Form</span>
+          inputs · textarea · submit button
+        </div>
+      </div>
+      <p class="text-[0.6rem] font-mono text-brand-muted mt-3">Used in: Contact section — md:grid-cols-2 gap-16 items-center</p>
+    </div>
+
+    <!-- 4-col journey grid -->
+    <div class="reveal">
+      <span class="state-label">4-Column Journey — grid md:grid-cols-4 gap-12 md:gap-8</span>
+      <div class="grid md:grid-cols-4 gap-4">
+        <div class="border border-white/5 p-4 text-center text-xs font-mono text-brand-muted">
+          <span class="font-serif text-3xl text-brand-gold/30 block mb-2">01</span>
+          <span class="text-[0.6rem]">Step label + body</span>
+        </div>
+        <div class="border border-white/5 p-4 text-center text-xs font-mono text-brand-muted">
+          <span class="font-serif text-3xl text-brand-gold/30 block mb-2">02</span>
+          <span class="text-[0.6rem]">Step label + body</span>
+        </div>
+        <div class="border border-white/5 p-4 text-center text-xs font-mono text-brand-muted">
+          <span class="font-serif text-3xl text-brand-gold/30 block mb-2">03</span>
+          <span class="text-[0.6rem]">Step label + body</span>
+        </div>
+        <div class="border border-white/5 p-4 text-center text-xs font-mono text-brand-muted">
+          <span class="font-serif text-3xl text-brand-gold/30 block mb-2">04</span>
+          <span class="text-[0.6rem]">Step label + body</span>
+        </div>
+      </div>
+      <p class="text-[0.6rem] font-mono text-brand-muted mt-3">Used in: Journey section — scrub-animated horizontal slide from xPercent:45</p>
+    </div>
+
+    <!-- Section spacing scale -->
+    <div class="reveal">
+      <span class="state-label">Section Vertical Spacing</span>
+      <div class="grid md:grid-cols-2 gap-4 text-[0.6rem] font-mono text-brand-muted">
+        <div class="border border-white/5 p-4"><span class="text-brand-gold">py-28 md:py-36</span> — Standard section: 7rem / 9rem</div>
+        <div class="border border-white/5 p-4"><span class="text-brand-gold">mb-6</span> — After section badge label</div>
+        <div class="border border-white/5 p-4"><span class="text-brand-gold">mb-16</span> — After section h2</div>
+        <div class="border border-white/5 p-4"><span class="text-brand-gold">h-20</span> — Fixed header height (5rem / 80px)</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     5) MOTION & INTERACTION
+══════════════════════════════════ -->
+<section class="relative z-10 max-w-7xl mx-auto px-6 md:px-10 py-28 md:py-36 ds-section-rule" id="motion">
+
+  <div class="reveal flex items-center gap-3 mb-6">
+    <span class="text-xs tracking-[0.3em] text-brand-gold uppercase font-mono">/ 05</span>
+    <iconify-icon class="text-brand-muted text-xs" icon="solar:close-linear"></iconify-icon>
+    <span class="text-xs tracking-[0.25em] text-brand-muted uppercase font-mono">Motion &amp; Interaction</span>
+  </div>
+
+  <h2 class="reveal font-serif tracking-tight text-[clamp(2rem,4.5vw,4rem)] leading-[1] mb-16 max-w-3xl">
+    Motion &amp;
+    <span class="italic text-brand-gold">Interaction</span>.
+  </h2>
+
+  <!-- Motion gallery -->
+  <div class="grid md:grid-cols-3 gap-6 mb-16">
+
+    <!-- .reveal scroll entrance -->
+    <div class="border border-white/5 p-8 flex flex-col items-center justify-center text-center gap-4">
+      <span class="text-xs font-mono text-brand-gold">.reveal</span>
+      <p class="text-[0.6rem] font-mono text-brand-muted">GSAP ScrollTrigger · from y:48 blur:8px opacity:0<br/>to y:0 blur:0 opacity:1 · duration:1.05s · power3.out</p>
+      <div class="reveal w-16 h-16 bg-brand-gold/20 rounded border border-brand-gold/20"></div>
+    </div>
+
+    <!-- .aura-word stagger -->
+    <div class="border border-white/5 p-8 flex flex-col items-center justify-center text-center gap-4">
+      <span class="text-xs font-mono text-brand-gold">.aura-word</span>
+      <p class="text-[0.6rem] font-mono text-brand-muted">auraWordIn keyframe · translateY(0.5em) rotate(2deg) blur(6px)<br/>0.9s cubic-bezier(.16,1,.3,1) · stagger: 0.06s per word</p>
+      <h2 class="font-serif text-2xl text-brand-cream">
+        <span class="aura-word" style="animation-play-state:running;animation-delay:0s">Fluid</span>
+        <span class="aura-word" style="animation-play-state:running;animation-delay:0.1s"> Motion</span>
+        <span class="aura-word" style="animation-play-state:running;animation-delay:0.2s"> Always</span>
+      </h2>
+    </div>
+
+    <!-- .magnetic -->
+    <div class="border border-white/5 p-8 flex flex-col items-center justify-center text-center gap-4">
+      <span class="text-xs font-mono text-brand-gold">.magnetic</span>
+      <p class="text-[0.6rem] font-mono text-brand-muted">mousemove: x*0.3, y*0.4 · duration:0.5s · power3.out<br/>mouseleave: elastic.out(1,0.4) · duration:0.6s</p>
+      <a href="#" class="group magnetic flex items-center gap-3 bg-brand-cream text-brand-bg px-5 py-3" onclick="return false">
+        <span class="text-xs tracking-[0.15em] font-medium uppercase">Hover Me</span>
+      </a>
+    </div>
+
+    <!-- Hero beam -->
+    <div class="border border-white/5 p-8 flex flex-col items-center justify-center text-center gap-4">
+      <span class="text-xs font-mono text-brand-gold">.hero-beam</span>
+      <p class="text-[0.6rem] font-mono text-brand-muted">heroBeamFadeIn 0.8s + heroBeamFlow 3.2s linear ∞<br/>stroke-dasharray:22 78 · gold drop-shadow glow</p>
+      <svg width="60" height="80" viewBox="0 0 60 80">
+        <defs>
+          <linearGradient id="demoBeam" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="rgba(197,166,124,0)"/>
+            <stop offset="50%" stop-color="rgba(197,166,124,0.9)"/>
+            <stop offset="100%" stop-color="rgba(197,166,124,0)"/>
+          </linearGradient>
+        </defs>
+        <path class="hero-beam" d="M30,0 Q50,40 30,80" fill="none" pathLength="100" stroke="url(#demoBeam)" stroke-dasharray="22 78" stroke-linecap="round" stroke-width="2" style="filter:drop-shadow(0 0 4px rgba(197,166,124,0.9))"></path>
+      </svg>
+    </div>
+
+    <!-- Hover lift (feature card) -->
+    <div class="border border-white/5 p-8 flex flex-col items-center justify-center text-center gap-4">
+      <span class="text-xs font-mono text-brand-gold">Card Hover Lift</span>
+      <p class="text-[0.6rem] font-mono text-brand-muted">.feat-section .reveal.group:hover<br/>translateY(-6px) · shadow rgba(197,166,124,.25) · 0.4s</p>
+      <div class="feat-section">
+        <div class="reveal group bg-[#f3efe6] px-6 py-4 transition-colors duration-500 hover:bg-[#ebe5d8] cursor-pointer">
+          <iconify-icon class="text-brand-gold text-2xl" icon="solar:wallet-money-linear"></iconify-icon>
+          <p class="text-xs text-[#5a5a5a] mt-2">Hover to lift</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- animate-ping -->
+    <div class="border border-white/5 p-8 flex flex-col items-center justify-center text-center gap-4">
+      <span class="text-xs font-mono text-brand-gold">animate-ping</span>
+      <p class="text-[0.6rem] font-mono text-brand-muted">Tailwind ping keyframe · scale(2) opacity:0<br/>1s cubic-bezier(0,0,0.2,1) ∞ · live indicator dot</p>
+      <div class="relative flex items-center gap-3">
+        <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+        <span class="text-[0.6rem] tracking-[0.25em] text-brand-cream uppercase font-mono">Live</span>
+        <span class="absolute -left-1 -top-1 w-4 h-4 rounded-full bg-brand-gold/30 animate-ping"></span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- GSAP hero timeline summary -->
+  <div class="reveal border border-white/5 p-6 rounded">
+    <h3 class="text-sm tracking-[0.15em] uppercase font-medium mb-6 text-brand-cream">Hero Entrance Timeline (GSAP)</h3>
+    <div class="grid md:grid-cols-4 gap-4 text-[0.6rem] font-mono text-brand-muted">
+      <div class="border border-white/5 p-3">
+        <span class="text-brand-gold block mb-1">t=0s</span>
+        .gsap-bg-img<br/>scale:1.1→1 · opacity:0→0.6<br/>duration:2.4s · power2.out
+      </div>
+      <div class="border border-white/5 p-3">
+        <span class="text-brand-gold block mb-1">t=0.2s</span>
+        .gsap-curve<br/>scaleX:1.2→1 · origin:left center<br/>duration:1.9s · power4.inOut
+      </div>
+      <div class="border border-white/5 p-3">
+        <span class="text-brand-gold block mb-1">t=0.55s</span>
+        .gsap-text (h1 lines)<br/>yPercent:110→0 · rotate:3→0<br/>stagger:0.14 · expo.out
+      </div>
+      <div class="border border-white/5 p-3">
+        <span class="text-brand-gold block mb-1">t=1s</span>
+        .gsap-element (UI)<br/>y:26→0 · opacity:0→1 · blur<br/>stagger:0.12 · power3.out
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ══════════════════════════════════
+     6) ICONS
+══════════════════════════════════ -->
+<section class="relative z-10 max-w-7xl mx-auto px-6 md:px-10 py-28 md:py-36 ds-section-rule" id="icons">
+
+  <div class="reveal flex items-center gap-3 mb-6">
+    <span class="text-xs tracking-[0.3em] text-brand-gold uppercase font-mono">/ 06</span>
+    <iconify-icon class="text-brand-muted text-xs" icon="solar:close-linear"></iconify-icon>
+    <span class="text-xs tracking-[0.25em] text-brand-muted uppercase font-mono">Icons</span>
+  </div>
+
+  <h2 class="reveal font-serif tracking-tight text-[clamp(2rem,4.5vw,4rem)] leading-[1] mb-16 max-w-3xl">
+    Solar
+    <span class="italic text-brand-gold">Linear</span> icon set.
+  </h2>
+
+  <!-- Icon gallery with sizes + labels -->
+  <div class="reveal mb-16">
+    <h3 class="text-sm tracking-[0.15em] uppercase font-medium mb-8 text-brand-cream">All Icons Used</h3>
+    <div class="grid grid-cols-3 md:grid-cols-6 gap-6">
+
+      <div class="border border-white/5 p-6 flex flex-col items-center gap-3 text-center">
+        <iconify-icon class="text-brand-gold text-3xl" icon="solar:wallet-money-linear"></iconify-icon>
+        <span class="text-[0.55rem] font-mono text-brand-muted">wallet-money-linear</span>
+        <span class="text-[0.55rem] font-mono text-brand-gold/60">Features</span>
+      </div>
+
+      <div class="border border-white/5 p-6 flex flex-col items-center gap-3 text-center">
+        <iconify-icon class="text-brand-gold text-3xl" icon="solar:graph-up-linear"></iconify-icon>
+        <span class="text-[0.55rem] font-mono text-brand-muted">graph-up-linear</span>
+        <span class="text-[0.55rem] font-mono text-brand-gold/60">Features</span>
+      </div>
+
+      <div class="border border-white/5 p-6 flex flex-col items-center gap-3 text-center">
+        <iconify-icon class="text-brand-gold text-3xl" icon="solar:transfer-horizontal-linear"></iconify-icon>
+        <span class="text-[0.55rem] font-mono text-brand-muted">transfer-horizontal-linear</span>
+        <span class="text-[0.55rem] font-mono text-brand-gold/60">Features</span>
+      </div>
+
+      <div class="border border-white/5 p-6 flex flex-col items-center gap-3 text-center">
+        <iconify-icon class="text-brand-gold text-3xl" icon="solar:shield-keyhole-linear"></iconify-icon>
+        <span class="text-[0.55rem] font-mono text-brand-muted">shield-keyhole-linear</span>
+        <span class="text-[0.55rem] font-mono text-brand-gold/60">Features</span>
+      </div>
+
+      <div class="border border-white/5 p-6 flex flex-col items-center gap-3 text-center">
+        <iconify-icon class="text-brand-gold text-3xl" icon="solar:widget-add-linear"></iconify-icon>
+        <span class="text-[0.55rem] font-mono text-brand-muted">widget-add-linear</span>
+        <span class="text-[0.55rem] font-mono text-brand-gold/60">Features</span>
+      </div>
+
+      <div class="border border-white/5 p-6 flex flex-col items-center gap-3 text-center">
+        <iconify-icon class="text-brand-gold text-3xl" icon="solar:users-group-rounded-linear"></iconify-icon>
+        <span class="text-[0.55rem] font-mono text-brand-muted">users-group-rounded-linear</span>
+        <span class="text-[0.55rem] font-mono text-brand-gold/60">Features</span>
+      </div>
+
+      <div class="border border-white/5 p-6 flex flex-col items-center gap-3 text-center">
+        <iconify-icon class="text-brand-cream text-3xl" icon="solar:arrow-right-up-linear"></iconify-icon>
+        <span class="text-[0.55rem] font-mono text-brand-muted">arrow-right-up-linear</span>
+        <span class="text-[0.55rem] font-mono text-brand-gold/60">Buttons / Nav</span>
+      </div>
+
+      <div class="border border-white/5 p-6 flex flex-col items-center gap-3 text-center">
+        <iconify-icon class="text-brand-gold text-3xl" icon="solar:check-circle-linear"></iconify-icon>
+        <span class="text-[0.55rem] font-mono text-brand-muted">check-circle-linear</span>
+        <span class="text-[0.55rem] font-mono text-brand-gold/60">Pricing lists</span>
+      </div>
+
+      <div class="border border-white/5 p-6 flex flex-col items-center gap-3 text-center">
+        <iconify-icon class="text-brand-gold text-3xl" icon="solar:shield-check-linear"></iconify-icon>
+        <span class="text-[0.55rem] font-mono text-brand-muted">shield-check-linear</span>
+        <span class="text-[0.55rem] font-mono text-brand-gold/60">Hero divider</span>
+      </div>
+
+      <div class="border border-white/5 p-6 flex flex-col items-center gap-3 text-center">
+        <iconify-icon class="text-brand-muted text-3xl" icon="solar:close-linear"></iconify-icon>
+        <span class="text-[0.55rem] font-mono text-brand-muted">close-linear</span>
+        <span class="text-[0.55rem] font-mono text-brand-gold/60">Hero badge × separator</span>
+      </div>
+
+      <div class="border border-white/5 p-6 flex flex-col items-center gap-3 text-center">
+        <iconify-icon class="text-brand-gold text-3xl" icon="solar:letter-linear"></iconify-icon>
+        <span class="text-[0.55rem] font-mono text-brand-muted">letter-linear</span>
+        <span class="text-[0.55rem] font-mono text-brand-gold/60">Contact section</span>
+      </div>
+
+      <div class="border border-white/5 p-6 flex flex-col items-center gap-3 text-center">
+        <iconify-icon class="text-brand-gold text-3xl" icon="solar:map-point-linear"></iconify-icon>
+        <span class="text-[0.55rem] font-mono text-brand-muted">map-point-linear</span>
+        <span class="text-[0.55rem] font-mono text-brand-gold/60">Contact section</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Size variants -->
+  <div class="reveal mb-16">
+    <h3 class="text-sm tracking-[0.15em] uppercase font-medium mb-8 text-brand-cream">Size Variants &amp; Color Inheritance</h3>
+    <div class="flex flex-wrap items-end gap-8 border border-white/5 p-8">
+      <div class="flex flex-col items-center gap-2">
+        <iconify-icon class="text-brand-gold text-xs" icon="solar:arrow-right-up-linear"></iconify-icon>
+        <span class="text-[0.6rem] font-mono text-brand-muted">text-xs · 12px</span>
+        <span class="text-[0.55rem] font-mono text-brand-gold/60">badge sep</span>
+      </div>
+      <div class="flex flex-col items-center gap-2">
+        <iconify-icon class="text-brand-gold text-sm" icon="solar:arrow-right-up-linear"></iconify-icon>
+        <span class="text-[0.6rem] font-mono text-brand-muted">text-sm · 14px</span>
+        <span class="text-[0.55rem] font-mono text-brand-gold/60">divider icon</span>
+      </div>
+      <div class="flex flex-col items-center gap-2">
+        <iconify-icon class="text-brand-cream text-base" icon="solar:arrow-right-up-linear"></iconify-icon>
+        <span class="text-[0.6rem] font-mono text-brand-muted">text-base · 16px</span>
+        <span class="text-[0.55rem] font-mono text-brand-gold/60">nav CTA</span>
+      </div>
+      <div class="flex flex-col items-center gap-2">
+        <iconify-icon class="text-brand-cream text-lg" icon="solar:arrow-right-up-linear"></iconify-icon>
+        <span class="text-[0.6rem] font-mono text-brand-muted">text-lg · 18px</span>
+        <span class="text-[0.55rem] font-mono text-brand-gold/60">primary CTA</span>
+      </div>
+      <div class="flex flex-col items-center gap-2">
+        <iconify-icon class="text-brand-gold text-3xl" icon="solar:wallet-money-linear"></iconify-icon>
+        <span class="text-[0.6rem] font-mono text-brand-muted">text-3xl · 30px</span>
+        <span class="text-[0.55rem] font-mono text-brand-gold/60">feature cards</span>
+      </div>
+    </div>
+    <p class="text-[0.6rem] font-mono text-brand-muted mt-3">Icons inherit text color via currentColor. Size is set via Tailwind text-* classes on the iconify-icon element.</p>
+  </div>
+
+</section>
+
+
+<!-- ══════════════════════════════════
+     FOOTER
+══════════════════════════════════ -->
+<footer class="relative z-10 border-t border-white/5 py-10">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between flex-wrap gap-4">
+    <span class="text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono">© 2026 Sequra Inc. — Design System v4</span>
+    <div class="flex items-center gap-6 text-[0.65rem] tracking-[0.2em] text-brand-muted uppercase font-mono">
+      <a href="#top" class="hover:text-brand-cream transition-colors">Hero</a>
+      <a href="#typography" class="hover:text-brand-cream transition-colors">Type</a>
+      <a href="#colors" class="hover:text-brand-cream transition-colors">Color</a>
+      <a href="#components" class="hover:text-brand-cream transition-colors">Components</a>
+      <a href="#motion" class="hover:text-brand-cream transition-colors">Motion</a>
+      <a href="#icons" class="hover:text-brand-cream transition-colors">Icons</a>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════
+     SCRIPTS
+══════════════════════════════════ -->
+<script>
+  // Ambient particles (exact original)
+  const canvas = document.getElementById('ambient-canvas');
+  const ctx = canvas.getContext('2d');
+  let width, height, particles = [];
+  function initCanvas(){
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+    particles = [];
+    for(let i=0;i<120;i++){
+      particles.push({x:Math.random()*width,y:Math.random()*height,radius:Math.random()*1.5,vx:(Math.random()-0.5)*0.2,vy:(Math.random()-0.5)*0.2,alpha:Math.random()*0.5+0.1});
+    }
+  }
+  function animateCanvas(){
+    ctx.clearRect(0,0,width,height);
+    ctx.fillStyle='#c5a67c';
+    particles.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x=width;if(p.x>width)p.x=0;
+      if(p.y<0)p.y=height;if(p.y>height)p.y=0;
+      ctx.globalAlpha=p.alpha;ctx.beginPath();ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);ctx.fill();
+    });
+    requestAnimationFrame(animateCanvas);
+  }
+  window.addEventListener('resize',initCanvas);
+  initCanvas();animateCanvas();
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.ticker.lagSmoothing(0);
+
+    // Scroll progress bar
+    const bar = document.getElementById('scroll-progress');
+    function updateProgress() {
+      const max = document.documentElement.scrollHeight - window.innerHeight || 1;
+      const p = Math.min(1, Math.max(0, window.scrollY / max));
+      bar.style.width = (p * 100) + '%';
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
+    updateProgress();
+
+    // Smooth anchor scroll with header offset
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        const y = target.getBoundingClientRect().top + window.pageYOffset - 40;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      });
+    });
+
+    // ── Hero entrance timeline (exact original) ──
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    gsap.set('.gsap-bg-img', { scale: 1.1, opacity: 0 });
+    gsap.set('.gsap-curve', { scaleX: 1.2, transformOrigin: 'left center' });
+    gsap.set('.gsap-text', { yPercent: 110, rotate: 3 });
+    gsap.set('.gsap-element', { y: 26, opacity: 0, filter: 'blur(6px)' });
+    tl.to('.gsap-bg-img', { duration: 2.4, scale: 1, opacity: 0.6, ease: 'power2.out' }, 0)
+      .to('.gsap-curve', { duration: 1.9, scaleX: 1, ease: 'power4.inOut' }, 0.2)
+      .to('.gsap-text', { duration: 1.25, yPercent: 0, rotate: 0, stagger: 0.14, ease: 'expo.out' }, 0.55)
+      .to('.gsap-element', { duration: 1, y: 0, opacity: 1, filter: 'blur(0px)', stagger: 0.12 }, 1);
+
+    // ── Hero parallax ──
+    gsap.to('.gsap-bg-img', { yPercent: 18, ease: 'none',
+      scrollTrigger: { trigger: '#top', start: 'top top', end: 'bottom top', scrub: 1 } });
+    gsap.to('#top h1', { yPercent: -30, autoAlpha: 0.2, ease: 'none',
+      scrollTrigger: { trigger: '#top', start: 'top top', end: 'bottom top', scrub: 1 } });
+
+    // ── Animated counters ──
+    document.querySelectorAll('[data-count]').forEach(el => {
+      const end = parseFloat(el.getAttribute('data-count'));
+      const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+      const prefix = el.getAttribute('data-prefix') || '';
+      const obj = { v: 0 };
+      ScrollTrigger.create({
+        trigger: el, start: 'top 90%', once: true,
+        onEnter: () => gsap.to(obj, {
+          v: end, duration: 2, ease: 'power2.out',
+          onUpdate: () => {
+            const n = decimals ? obj.v.toFixed(decimals) : Math.round(obj.v).toLocaleString();
+            el.textContent = prefix + n;
+          }
+        })
+      });
+    });
+
+    // ── Generic .reveal ──
+    gsap.utils.toArray('.reveal').forEach(el => {
+      gsap.fromTo(el,
+        { y: 48, opacity: 0, filter: 'blur(8px)' },
+        { y: 0, opacity: 1, filter: 'blur(0px)', duration: 1.05, ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none reverse' } });
+    });
+
+    // ── Feature card hover lift ──
+    const featCards = gsap.utils.toArray('.feat-section .reveal.group');
+    if (featCards.length) {
+      gsap.set(featCards, { autoAlpha: 1 });
+    }
+
+    // ── Magnetic micro-interactions ──
+    document.querySelectorAll('.magnetic').forEach(el => {
+      el.addEventListener('mousemove', e => {
+        const r = el.getBoundingClientRect();
+        const x = e.clientX - r.left - r.width / 2;
+        const y = e.clientY - r.top - r.height / 2;
+        gsap.to(el, { x: x * 0.3, y: y * 0.4, duration: 0.5, ease: 'power3.out' });
+      });
+      el.addEventListener('mouseleave', () => gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1,0.4)' }));
+    });
+
+    window.addEventListener('load', () => ScrollTrigger.refresh());
+    ScrollTrigger.refresh();
+  });
+</script>
+
+</body>
+</html>
