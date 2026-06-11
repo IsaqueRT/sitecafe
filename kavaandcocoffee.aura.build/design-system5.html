@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KÃVA Design System</title>
+<script src="assets/176e894661aa9cdc_3.4.17"></script>
+<script src="assets/5e943127343691a9_lucide.min.js"></script>
+<link href="assets/9920b926af7416d0_css2.css" rel="stylesheet"/>
+<link href="assets/4bcb63d746dc1754_css2.css" id="all-fonts-link-font-geist" rel="stylesheet"/>
+<style id="all-fonts-style-font-geist">.font-geist { font-family: 'Geist', sans-serif !important; }</style>
+<link href="assets/83d01db29098d701_css2.css" id="all-fonts-link-font-space-mono" rel="stylesheet"/>
+<style id="all-fonts-style-font-space-mono">.font-space-mono { font-family: 'Space Mono', monospace !important; }</style>
+<link href="assets/60d258dcf2061519_css2.css" id="all-fonts-link-font-syne" rel="stylesheet"/>
+<style id="all-fonts-style-font-syne">.font-syne { font-family: 'Syne', sans-serif !important; }</style>
+<link href="assets/9c50894902ed9077_index-CT3yR8VR.css" rel="stylesheet"/>
+<style id="ds-meta">
+  /* ── Design System meta layer (documentation only) ── */
+  .ds-topnav {
+    position: fixed;
+    inset-x: 0;
+    top: 0;
+    z-index: 200;
+    background: rgba(10,7,4,0.97);
+    border-bottom: 1px solid rgba(254,243,199,0.12);
+    backdrop-filter: blur(20px);
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    height: 40px;
+  }
+  .ds-topnav::-webkit-scrollbar { display: none; }
+  .ds-topnav-brand {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: rgba(254,243,199,0.32);
+    padding: 0 1.25rem;
+    border-right: 1px solid rgba(254,243,199,0.1);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .ds-topnav a {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgba(254,243,199,0.42);
+    text-decoration: none;
+    padding: 0 1rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    border-right: 1px solid rgba(254,243,199,0.06);
+    transition: color 0.15s, background 0.15s;
+    flex-shrink: 0;
+  }
+  .ds-topnav a:hover { color: rgba(254,243,199,1); background: rgba(254,243,199,0.04); }
+
+  body { padding-top: 40px; }
+
+  /* DS section scaffold */
+  .ds-section { padding: 5rem 0 4rem; }
+  .ds-section-inner { max-width: 80rem; margin: 0 auto; padding: 0 2rem; }
+
+  .ds-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: rgba(254,243,199,0.32);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .ds-heading {
+    font-family: 'Geist', sans-serif;
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: rgba(254,243,199,0.88);
+    margin-bottom: 0.5rem;
+  }
+  .ds-desc {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.875rem;
+    color: rgba(254,243,199,0.38);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+  .ds-divider {
+    border: none;
+    border-top: 1px solid rgba(254,243,199,0.07);
+    margin: 4rem 0;
+  }
+
+  /* Type spec table */
+  .type-row {
+    display: grid;
+    grid-template-columns: 160px 1fr auto;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(254,243,199,0.05);
+  }
+  .type-row:first-child { border-top: 1px solid rgba(254,243,199,0.05); }
+  .type-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(254,243,199,0.32);
+    line-height: 1.4;
+  }
+  .type-spec-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.625rem;
+    color: rgba(254,243,199,0.28);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  /* Color swatch */
+  .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; }
+  .swatch { overflow: hidden; }
+  .swatch-color { height: 72px; }
+  .swatch-info { padding: 0.6rem 0.75rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-top: none; }
+  .swatch-name { font-family: 'Space Mono', monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(254,243,199,0.45); display: block; }
+  .swatch-value { font-family: 'Space Mono', monospace; font-size: 0.6rem; color: rgba(254,243,199,0.25); display: block; margin-top: 0.2rem; }
+
+  /* Component state strip */
+  .state-strip { display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start; }
+  .state-item { display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  .state-label { font-family: 'Space Mono', monospace; font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(254,243,199,0.28); }
+
+  /* Motion demo */
+  .motion-box {
+    padding: 2.5rem 2rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    text-align: center;
+  }
+  .motion-caption { font-family: 'Space Mono', monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(254,243,199,0.3); margin-top: 0.5rem; }
+
+  /* Layout demo box */
+  .layout-demo { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); padding: 1.5rem; margin-bottom: 1rem; }
+  .layout-col { background: rgba(254,243,199,0.06); border: 1px dashed rgba(254,243,199,0.12); padding: 0.75rem; min-height: 60px; display: flex; align-items: center; justify-content: center; }
+  .layout-col-label { font-family: 'Space Mono', monospace; font-size: 0.55rem; color: rgba(254,243,199,0.3); text-transform: uppercase; letter-spacing: 0.1em; }
+
+  /* Icon grid */
+  .icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 1px; background: rgba(254,243,199,0.06); }
+  .icon-cell { background: #0d0906; padding: 1.5rem 1rem; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
+  .icon-name { font-family: 'Space Mono', monospace; font-size: 0.55rem; color: rgba(254,243,199,0.3); text-transform: uppercase; letter-spacing: 0.06em; text-align: center; }
+
+  /* DS surface preview box */
+  .surface-preview { min-height: 80px; padding: 1.25rem; border: 1px solid rgba(255,255,255,0.06); margin-bottom: 0.5rem; display: flex; align-items: center; }
+</style>
+</head>
+
+<body class="bg-[#100c08] text-stone-100 antialiased" style="font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
+
+<style id="kava-modern-polish">
+  :root { color-scheme: dark; }
+  ::selection { background: rgba(254, 243, 199, 0.25); color: #fef3c7; }
+  body { background: radial-gradient(circle at 15% 10%, rgba(251, 191, 36, 0.12), transparent 32rem), radial-gradient(circle at 85% 8%, rgba(120, 53, 15, 0.18), transparent 34rem), #0d0906; }
+  body::before { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.075; mix-blend-mode: soft-light; background-image: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27120%27 height=%27120%27 viewBox=%270 0 120 120%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.9%27 numOctaves=%273%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27120%27 height=%27120%27 filter=%27url(%23n)%27 opacity=%270.42%27/%3E%3C/svg%3E'); }
+  section[id] { position: relative; }
+  section[id]::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; pointer-events: none; background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.22), transparent); }
+  .modern-edge { box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22); }
+  .kava-glow { box-shadow: 0 28px 90px rgba(146, 64, 14, 0.28), inset 0 1px 0 rgba(255,255,255,0.08); }
+  .kava-card { position: relative; overflow: hidden; }
+  .kava-card::before { content: ''; position: absolute; inset: -1px; pointer-events: none; background: linear-gradient(135deg, rgba(254,243,199,0.20), transparent 38%, rgba(251,191,36,0.08)); opacity: 0.8; }
+  .kava-outline-text { -webkit-text-stroke: 1px rgba(254, 243, 199, 0.38); color: transparent; }
+  .slow-drift { transform: translate3d(0,0,0); }
+  @media (prefers-reduced-motion: no-preference) {
+    .slow-drift { animation: slowDrift 18s ease-in-out infinite alternate; }
+    @keyframes slowDrift { from { transform: translate3d(-1.5%, -1%, 0) scale(1.03); } to { transform: translate3d(1.5%, 1%, 0) scale(1.08); } }
+  }
+  *, *::before, *::after { border-radius: 0 !important; }
+</style>
+
+<!-- ═══════════════════════════════════════════
+  DS META NAV
+═══════════════════════════════════════════ -->
+<nav class="ds-topnav">
+  <span class="ds-topnav-brand">KÃVA · DS5</span>
+  <a href="#ds-hero">0 · Hero</a>
+  <a href="#ds-typography">1 · Typography</a>
+  <a href="#ds-colors">2 · Colors</a>
+  <a href="#ds-components">3 · Components</a>
+  <a href="#ds-layout">4 · Layout</a>
+  <a href="#ds-motion">5 · Motion</a>
+  <a href="#ds-icons">6 · Icons</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+  0. HERO — EXACT CLONE (text adapted)
+═══════════════════════════════════════════ -->
+<div id="ds-hero">
+  <header class="border-b border-amber-100/10 bg-[#100c08]/80 shadow-[0_1px_40px_rgba(0,0,0,0.28)] backdrop-blur-2xl" style="position:fixed;inset-inline:0;top:40px;z-index:50;">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
+      <a class="flex items-center gap-3" href="#">
+        <span class="flex h-10 w-10 items-center justify-center rounded-full border border-amber-200/30 bg-amber-100/10">
+          <svg aria-hidden="true" class="lucide lucide-coffee h-5 w-5 text-amber-100" data-lucide="coffee" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M10 2v2"></path><path d="M14 2v2"></path><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"></path><path d="M6 2v2"></path></svg>
+        </span>
+        <span class="text-xl tracking-tight text-amber-50 font-geist">KÃVA &amp; Co. Coffee</span>
+      </a>
+      <div class="hidden gap-8 md:flex uppercase tracking-widest items-center">
+        <a class="text-sm font-medium text-amber-50/80 transition hover:text-amber-100 font-syne" href="#ds-typography">Typography</a>
+        <a class="text-sm font-medium text-amber-50/80 transition hover:text-amber-100 font-syne" href="#ds-colors">Colors</a>
+        <a class="text-sm font-medium text-amber-50/80 transition hover:text-amber-100 font-syne" href="#ds-components">Components</a>
+        <a class="text-sm font-medium text-amber-50/80 transition hover:text-amber-100 font-syne" href="#ds-motion">Motion</a>
+      </div>
+      <div class="hidden gap-3 md:flex items-center">
+        <a aria-label="Facebook" class="flex h-10 w-10 items-center justify-center rounded-full border border-amber-100/30 bg-amber-100/10 text-amber-50 transition hover:bg-amber-100/20 hover:text-white" href="#">
+          <svg aria-hidden="true" class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.84c0-2.52 1.49-3.91 3.77-3.91 1.09 0 2.23.2 2.23.2v2.47h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.44 2.91h-2.34V22C18.34 21.24 22 17.08 22 12.06Z"></path></svg>
+        </a>
+        <a aria-label="Instagram" class="flex h-10 w-10 items-center justify-center rounded-full border border-amber-100/30 bg-amber-100/10 text-amber-50 transition hover:bg-amber-100/20 hover:text-white" href="#">
+          <svg aria-hidden="true" class="h-4 w-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><rect height="18" rx="5" width="18" x="3" y="3"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" fill="currentColor" r="1" stroke="none"></circle></svg>
+        </a>
+        <a class="rounded-full bg-amber-100 px-5 py-2.5 text-sm font-medium text-stone-950 shadow-sm shadow-amber-950/20 transition hover:bg-amber-50 font-syne" href="#ds-components">Explore</a>
+      </div>
+      <button aria-label="Open menu" class="flex h-10 w-10 items-center justify-center rounded-full border border-amber-100/20 bg-white/5 text-amber-50 md:hidden" id="menuButtonDS">
+        <svg aria-hidden="true" class="lucide lucide-menu h-5 w-5" data-lucide="menu" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg>
+      </button>
+    </nav>
+    <div class="hidden border-t border-amber-100/15 bg-[#100c08]/95 px-5 py-5 md:hidden" id="mobileMenuDS">
+      <div class="flex flex-col gap-4">
+        <a class="text-base font-medium text-amber-50/85 font-syne" href="#ds-typography">Typography</a>
+        <a class="text-base font-medium text-amber-50/85 font-syne" href="#ds-colors">Colors</a>
+        <a class="text-base font-medium text-amber-50/85 font-syne" href="#ds-components">Components</a>
+        <a class="text-base font-medium text-amber-50/85 font-syne" href="#ds-layout">Layout</a>
+        <a class="text-base font-medium text-amber-50/85 font-syne" href="#ds-motion">Motion</a>
+        <a class="mt-2 inline-flex items-center justify-center rounded-full bg-amber-100 px-5 py-3 text-sm font-semibold text-stone-950 font-syne" href="#ds-icons">Icons</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="relative min-h-screen overflow-hidden">
+    <div class="absolute inset-0">
+      <img alt="Modern coffee shop counter with warm sunlight and espresso service" class="h-full w-full object-cover" src="assets/20bd6972625fbad8_bf52d560-0bd7-452d-a97a-5f0717.png"/>
+      <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/30 to-black/40"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-[#100c08]/95 via-transparent to-black/10"></div>
+    </div>
+    <div class="pointer-events-none absolute inset-0 hidden lg:block">
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(254,243,199,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(254,243,199,0.055)_1px,transparent_1px)] bg-[size:96px_96px] opacity-40"></div>
+      <div class="absolute left-10 top-28 h-[calc(100%-10rem)] border-l border-amber-100/25"></div>
+      <div class="absolute bottom-20 left-10 text-[10px] font-semibold uppercase tracking-[0.45em] text-amber-100/55 [writing-mode:vertical-rl] font-syne">Design System</div>
+      <div class="absolute left-1/2 top-0 h-full border-l border-amber-100/30"></div>
+      <div class="absolute bottom-[32%] left-0 right-0 border-t border-amber-100/25"></div>
+    </div>
+    <div class="relative mx-auto flex min-h-screen max-w-7xl flex-col justify-between px-5 pb-10 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36">
+      <div class="max-w-5xl">
+        <h1 class="max-w-5xl text-5xl tracking-tight text-amber-100 sm:text-7xl lg:text-8xl font-geist">
+          Every Token, Every<br/>Pattern, Documented
+        </h1>
+      </div>
+      <div class="grid gap-6 lg:grid-cols-2 lg:items-end">
+        <div class="modern-edge border border-amber-100/15 border-l-4 border-l-amber-200/70 bg-[#100c08]/55 p-6 backdrop-blur-xl lg:max-w-xl">
+          <p class="text-lg leading-8 text-amber-50/82 font-syne">
+            A living design system for the KÃVA &amp; Co. identity — exact colors, type scales, components, animations, and layout patterns from the source design.
+          </p>
+          <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+            <a class="inline-flex items-center justify-center gap-3 bg-amber-100 px-6 py-3 text-sm font-semibold uppercase tracking-widest text-stone-950 transition hover:bg-amber-50 font-syne" href="#ds-components">
+              View components
+              <span class="h-2 w-2 rounded-full bg-stone-950"></span>
+            </a>
+            <a class="inline-flex items-center justify-center gap-2 rounded-full border border-amber-100/25 bg-white/10 px-6 py-3 text-sm font-semibold text-amber-50 transition hover:bg-white/15 font-syne" href="#ds-typography">
+              Typography
+              <svg aria-hidden="true" class="lucide lucide-arrow-right h-4 w-4" data-lucide="arrow-right" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════
+  1. TYPOGRAPHY
+═══════════════════════════════════════════ -->
+<section class="bg-[#100c08] ds-section" id="ds-typography">
+  <div class="ds-section-inner">
+    <span class="ds-eyebrow">Section 01</span>
+    <h2 class="ds-heading">Typography</h2>
+    <p class="ds-desc">All text styles present in the reference design. Each row shows the live element, its class set, and its computed size / leading. Fonts: <strong style="color:rgba(254,243,199,0.6)">Geist</strong> (headings) · <strong style="color:rgba(254,243,199,0.6)">Syne</strong> (body &amp; UI).</p>
+
+    <!-- Type rows -->
+    <div class="type-row">
+      <span class="type-name">Heading 1<br/>Hero scale</span>
+      <h1 class="text-5xl tracking-tight text-amber-100 font-geist" style="margin:0;line-height:1;">A New Era</h1>
+      <span class="type-spec-label">48–96px / 1.0<br/>font-geist · tracking-tight</span>
+    </div>
+
+    <div class="type-row">
+      <span class="type-name">Heading 2<br/>Section title</span>
+      <h2 class="text-4xl tracking-tight text-amber-50 sm:text-5xl font-geist" style="margin:0;line-height:1.1;">Coffee &amp; Community</h2>
+      <span class="type-spec-label">36–48px / 1.1<br/>font-geist · tracking-tight</span>
+    </div>
+
+    <div class="type-row">
+      <span class="type-name">Heading 3<br/>Large card</span>
+      <h3 class="text-3xl tracking-tight text-amber-50 sm:text-4xl font-geist" style="margin:0;line-height:1.15;">A gratifying experience.</h3>
+      <span class="type-spec-label">30–36px / 1.15<br/>font-geist · tracking-tight</span>
+    </div>
+
+    <div class="type-row">
+      <span class="type-name">Heading 4<br/>Card / feature</span>
+      <h3 class="text-2xl tracking-tight text-amber-50 font-geist" style="margin:0;line-height:1.25;">Exceptional beverages</h3>
+      <span class="type-spec-label">24px / 32px<br/>font-geist · tracking-tight</span>
+    </div>
+
+    <div class="type-row">
+      <span class="type-name">Heading 4 sm<br/>Article / tile</span>
+      <h3 class="text-xl tracking-tight text-amber-50 font-geist" style="margin:0;line-height:1.4;">Coffee classics</h3>
+      <span class="type-spec-label">20px / 28px<br/>font-geist · tracking-tight</span>
+    </div>
+
+    <div class="type-row">
+      <span class="type-name">Display number<br/>Outline style</span>
+      <p class="kava-outline-text text-5xl tracking-tight font-geist" style="margin:0;line-height:1;">01</p>
+      <span class="type-spec-label">48px / 1.0<br/>kava-outline-text · font-geist</span>
+    </div>
+
+    <div class="type-row">
+      <span class="type-name">Eyebrow label<br/>Dark surface</span>
+      <p class="text-sm font-semibold uppercase tracking-widest text-amber-200/80 font-syne" style="margin:0;">Our approach</p>
+      <span class="type-spec-label">14px / 20px<br/>font-syne · tracking-widest · semibold</span>
+    </div>
+
+    <div class="type-row">
+      <span class="type-name">Eyebrow label<br/>Light surface</span>
+      <p class="text-sm font-medium uppercase tracking-widest text-stone-600 font-syne" style="margin:0;">Welcome to KÃVA</p>
+      <span class="type-spec-label">14px / 20px<br/>font-syne · tracking-widest · medium</span>
+    </div>
+
+    <div class="type-row">
+      <span class="type-name">Paragraph L<br/>Hero / section</span>
+      <p class="text-lg leading-8 text-amber-50/82 font-syne" style="margin:0;max-width:480px;">A welcoming community gem known for quality, modern style, and an easy menu.</p>
+      <span class="type-spec-label">18px / 32px<br/>font-syne · leading-8</span>
+    </div>
+
+    <div class="type-row">
+      <span class="type-name">Paragraph M<br/>Card body</span>
+      <p class="text-base leading-7 text-stone-400 font-syne" style="margin:0;max-width:440px;">Rich espresso, Iced Chai Lattes, teas, smoothies, and café favourites for every visit.</p>
+      <span class="type-spec-label">16px / 28px<br/>font-syne · leading-7</span>
+    </div>
+
+    <div class="type-row">
+      <span class="type-name">Paragraph S<br/>Footer / meta</span>
+      <p class="text-base text-stone-400 font-syne" style="margin:0;">© 2025, All Rights Reserved. Family-owned in Mill Bay Centre.</p>
+      <span class="type-spec-label">16px / 24px<br/>font-syne</span>
+    </div>
+
+    <div class="type-row">
+      <span class="type-name">UI label<br/>Ticker / tag</span>
+      <p class="text-sm font-semibold uppercase tracking-[0.28em] text-amber-100/70 font-syne" style="margin:0;">Locally roasted · Fresh baked · Family owned</p>
+      <span class="type-spec-label">14px / 20px<br/>font-syne · tracking-[0.28em]</span>
+    </div>
+
+    <div class="type-row">
+      <span class="type-name">Quote / review</span>
+      <p class="text-2xl leading-9 tracking-tight text-amber-50 font-geist" style="margin:0;">"Huge selection of sandwiches and pastries."</p>
+      <span class="type-spec-label">24px / 36px<br/>font-geist · tracking-tight · leading-9</span>
+    </div>
+
+    <div class="type-row">
+      <span class="type-name">Price / stat</span>
+      <p class="text-3xl tracking-tight text-stone-950 font-geist" style="margin:0;color:rgba(254,243,199,0.9);">$10–20</p>
+      <span class="type-spec-label">30px / 36px<br/>font-geist · tracking-tight</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  2. COLORS & SURFACES
+═══════════════════════════════════════════ -->
+<section class="bg-[#0d0906] ds-section" id="ds-colors">
+  <div class="ds-section-inner">
+    <span class="ds-eyebrow">Section 02</span>
+    <h2 class="ds-heading">Colors &amp; Surfaces</h2>
+    <p class="ds-desc">Exact color values used across backgrounds, text, borders, and overlays. All alpha values are as used in the source.</p>
+
+    <!-- Backgrounds -->
+    <h3 class="text-sm font-semibold uppercase tracking-widest text-amber-200/80 font-syne mb-4">Backgrounds</h3>
+    <div class="swatch-grid mb-10">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#0d0906;border:1px solid rgba(255,255,255,0.08);"></div>
+        <div class="swatch-info"><span class="swatch-name">Base Dark</span><span class="swatch-value">#0d0906</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#100c08;border:1px solid rgba(255,255,255,0.08);"></div>
+        <div class="swatch-info"><span class="swatch-name">Page / Nav</span><span class="swatch-value">#100c08</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#120d08;border:1px solid rgba(255,255,255,0.08);"></div>
+        <div class="swatch-info"><span class="swatch-name">Section Alt</span><span class="swatch-value">#120d08</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#f4eadc;"></div>
+        <div class="swatch-info"><span class="swatch-name">Light Cream</span><span class="swatch-value">#f4eadc</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#fff8ed;"></div>
+        <div class="swatch-info"><span class="swatch-name">Warm White</span><span class="swatch-value">#fff8ed</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:linear-gradient(135deg,#f4eadc 0%,#fff8ed 48%,#ead8bd 100%);"></div>
+        <div class="swatch-info"><span class="swatch-name">Menu Gradient</span><span class="swatch-value">135° cream</span></div>
+      </div>
+    </div>
+
+    <!-- Amber palette -->
+    <h3 class="text-sm font-semibold uppercase tracking-widest text-amber-200/80 font-syne mb-4">Amber — Primary Accent</h3>
+    <div class="swatch-grid mb-10">
+      <div class="swatch">
+        <div class="swatch-color bg-amber-50"></div>
+        <div class="swatch-info"><span class="swatch-name">Amber 50</span><span class="swatch-value">btn hover</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color bg-amber-100"></div>
+        <div class="swatch-info"><span class="swatch-name">Amber 100</span><span class="swatch-value">primary btn</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color bg-amber-200"></div>
+        <div class="swatch-info"><span class="swatch-name">Amber 200</span><span class="swatch-value">border accent</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:rgba(254,243,199,0.82);"></div>
+        <div class="swatch-info"><span class="swatch-name">Amber 50/82</span><span class="swatch-value">hero body text</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:rgba(254,243,199,0.10);"></div>
+        <div class="swatch-info"><span class="swatch-name">Amber 100/10</span><span class="swatch-value">icon bg</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:rgba(251,191,36,0.12);"></div>
+        <div class="swatch-info"><span class="swatch-name">Amber 400/12</span><span class="swatch-value">body radial glow</span></div>
+      </div>
+    </div>
+
+    <!-- Stone palette -->
+    <h3 class="text-sm font-semibold uppercase tracking-widest text-amber-200/80 font-syne mb-4">Stone — Neutrals</h3>
+    <div class="swatch-grid mb-10">
+      <div class="swatch">
+        <div class="swatch-color bg-stone-950"></div>
+        <div class="swatch-info"><span class="swatch-name">Stone 950</span><span class="swatch-value">dark btn, card</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color bg-stone-600" style="height:72px;"></div>
+        <div class="swatch-info"><span class="swatch-name">Stone 600</span><span class="swatch-value">body on light</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color bg-stone-400" style="height:72px;"></div>
+        <div class="swatch-info"><span class="swatch-name">Stone 400</span><span class="swatch-value">muted text</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:rgba(255,255,255,0.045);height:72px;border:1px solid rgba(255,255,255,0.1);"></div>
+        <div class="swatch-info"><span class="swatch-name">White/4.5%</span><span class="swatch-value">dark card bg</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:rgba(255,255,255,0.10);height:72px;border:1px solid rgba(255,255,255,0.1);"></div>
+        <div class="swatch-info"><span class="swatch-name">White/10%</span><span class="swatch-value">ghost btn bg</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:rgba(0,0,0,0.35);height:72px;border:1px solid rgba(255,255,255,0.1);"></div>
+        <div class="swatch-info"><span class="swatch-name">Black/35%</span><span class="swatch-value">glass overlay</span></div>
+      </div>
+    </div>
+
+    <!-- Gradients -->
+    <h3 class="text-sm font-semibold uppercase tracking-widest text-amber-200/80 font-syne mb-4">Gradients</h3>
+    <div class="swatch-grid mb-10">
+      <div class="swatch" style="grid-column:span 2;">
+        <div class="swatch-color" style="height:72px;background:linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.30), rgba(0,0,0,0.40));"></div>
+        <div class="swatch-info"><span class="swatch-name">Hero Horizontal</span><span class="swatch-value">from-black/85 via-black/30 to-black/40</span></div>
+      </div>
+      <div class="swatch" style="grid-column:span 2;">
+        <div class="swatch-color" style="height:72px;background:linear-gradient(to top, rgba(16,12,8,0.95), transparent, rgba(0,0,0,0.10));"></div>
+        <div class="swatch-info"><span class="swatch-name">Hero Vertical</span><span class="swatch-value">from-[#100c08]/95 via-transparent to-black/10</span></div>
+      </div>
+      <div class="swatch" style="grid-column:span 2;">
+        <div class="swatch-color" style="height:72px;background:linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.20), transparent);"></div>
+        <div class="swatch-info"><span class="swatch-name">Card Overlay</span><span class="swatch-value">from-black/85 via-black/20 to-transparent</span></div>
+      </div>
+      <div class="swatch" style="grid-column:span 2;">
+        <div class="swatch-color" style="height:72px;background:linear-gradient(135deg, rgba(254,243,199,0.20), transparent 38%, rgba(251,191,36,0.08));"></div>
+        <div class="swatch-info"><span class="swatch-name">kava-card Shine</span><span class="swatch-value">::before overlay on .kava-card</span></div>
+      </div>
+      <div class="swatch" style="grid-column:span 2;">
+        <div class="swatch-color" style="height:72px;background:linear-gradient(90deg, transparent, rgba(251,191,36,0.22), transparent);"></div>
+        <div class="swatch-info"><span class="swatch-name">Section Divider</span><span class="swatch-value">section[id]::after</span></div>
+      </div>
+    </div>
+
+    <!-- Borders -->
+    <h3 class="text-sm font-semibold uppercase tracking-widest text-amber-200/80 font-syne mb-4">Borders &amp; Dividers</h3>
+    <div class="space-y-3">
+      <div class="surface-preview" style="border-color:rgba(254,243,199,0.1);"><span class="type-spec-label">border-amber-100/10 — nav bottom, section borders</span></div>
+      <div class="surface-preview" style="border-color:rgba(254,243,199,0.15);"><span class="type-spec-label">border-amber-100/15 — hero card border, dark card borders</span></div>
+      <div class="surface-preview" style="border-color:rgba(254,243,199,0.25);border-left-width:4px;border-left-color:rgba(254,243,199,0.70);"><span class="type-spec-label">border-l-4 border-l-amber-200/70 — hero text card accent</span></div>
+      <div class="surface-preview" style="border:1px solid rgba(255,255,255,0.10);"><span class="type-spec-label">border-white/10 — dark card borders, review cards</span></div>
+      <div class="surface-preview" style="border:1px solid rgba(0,0,0,0.10);border-left:4px solid #0c0a09;"><span class="type-spec-label">border-stone-950/10 + border-l-4 border-l-stone-950 — light surface cards</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  3. UI COMPONENTS
+═══════════════════════════════════════════ -->
+<section class="bg-[#120d08] ds-section" id="ds-components">
+  <div class="ds-section-inner">
+    <span class="ds-eyebrow">Section 03</span>
+    <h2 class="ds-heading">UI Components</h2>
+    <p class="ds-desc">All interactive and display components from the reference. States shown side-by-side.</p>
+
+    <!-- BUTTONS -->
+    <h3 class="text-sm font-semibold uppercase tracking-widest text-amber-200/80 font-syne mb-6">Buttons</h3>
+
+    <div class="mb-8">
+      <span class="ds-eyebrow mb-3" style="display:block;">Primary CTA — Sharp edge, amber fill</span>
+      <div class="state-strip">
+        <div class="state-item">
+          <span class="state-label">Default</span>
+          <a class="inline-flex items-center justify-center gap-3 bg-amber-100 px-6 py-3 text-sm font-semibold uppercase tracking-widest text-stone-950 transition hover:bg-amber-50 font-syne" href="#">
+            Contact us <span class="h-2 w-2 rounded-full bg-stone-950"></span>
+          </a>
+        </div>
+        <div class="state-item">
+          <span class="state-label">Hover state</span>
+          <a class="inline-flex items-center justify-center gap-3 bg-amber-50 px-6 py-3 text-sm font-semibold uppercase tracking-widest text-stone-950 font-syne" href="#">
+            Contact us <span class="h-2 w-2 rounded-full bg-stone-950"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-8">
+      <span class="ds-eyebrow mb-3" style="display:block;">Secondary Ghost — Rounded, border + glass</span>
+      <div class="state-strip">
+        <div class="state-item">
+          <span class="state-label">Default</span>
+          <a class="inline-flex items-center justify-center gap-2 rounded-full border border-amber-100/25 bg-white/10 px-6 py-3 text-sm font-semibold text-amber-50 transition hover:bg-white/15 font-syne" href="#">
+            View menu
+            <svg aria-hidden="true" class="lucide lucide-arrow-right h-4 w-4" data-lucide="arrow-right" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+          </a>
+        </div>
+        <div class="state-item">
+          <span class="state-label">Hover state</span>
+          <a class="inline-flex items-center justify-center gap-2 rounded-full border border-amber-100/25 bg-white/15 px-6 py-3 text-sm font-semibold text-amber-50 font-syne" href="#">
+            View menu
+            <svg aria-hidden="true" class="lucide lucide-arrow-right h-4 w-4" data-lucide="arrow-right" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-8">
+      <span class="ds-eyebrow mb-3" style="display:block;">Dark CTA — Rounded, stone fill</span>
+      <div class="state-strip">
+        <div class="state-item">
+          <span class="state-label">Default</span>
+          <a class="inline-flex items-center justify-center gap-2 rounded-full bg-stone-950 px-6 py-3 text-sm font-semibold text-amber-50 transition hover:bg-stone-800 font-syne" href="#">
+            Get directions
+            <svg aria-hidden="true" class="lucide lucide-navigation h-4 w-4" data-lucide="navigation" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
+          </a>
+        </div>
+        <div class="state-item">
+          <span class="state-label">Hover state</span>
+          <a class="inline-flex items-center justify-center gap-2 rounded-full bg-stone-800 px-6 py-3 text-sm font-semibold text-amber-50 font-syne" href="#">
+            Get directions
+            <svg aria-hidden="true" class="lucide lucide-navigation h-4 w-4" data-lucide="navigation" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-8">
+      <span class="ds-eyebrow mb-3" style="display:block;">Light CTA — Rounded, white fill on light surface</span>
+      <div class="bg-[#f4eadc] p-6 inline-block">
+        <div class="state-strip">
+          <div class="state-item">
+            <span class="state-label" style="color:rgba(0,0,0,0.35);">Default</span>
+            <a class="inline-flex items-center justify-center gap-2 rounded-full border border-stone-950/15 bg-white px-6 py-3 text-sm font-semibold text-stone-950 transition hover:bg-stone-50 font-syne" href="#">
+              Call the cafe
+              <svg aria-hidden="true" class="lucide lucide-phone-call h-4 w-4" data-lucide="phone-call" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><path d="M13 2a9 9 0 0 1 9 9"></path><path d="M13 6a5 5 0 0 1 5 5"></path><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg>
+            </a>
+          </div>
+          <div class="state-item">
+            <span class="state-label" style="color:rgba(0,0,0,0.35);">Hover state</span>
+            <a class="inline-flex items-center justify-center gap-2 rounded-full border border-stone-950/15 bg-stone-50 px-6 py-3 text-sm font-semibold text-stone-950 font-syne" href="#">
+              Call the cafe
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-8">
+      <span class="ds-eyebrow mb-3" style="display:block;">Nav CTA — Compact amber pill</span>
+      <div class="state-strip">
+        <div class="state-item">
+          <span class="state-label">Default</span>
+          <a class="rounded-full bg-amber-100 px-5 py-2.5 text-sm font-medium text-stone-950 shadow-sm shadow-amber-950/20 transition hover:bg-amber-50 font-syne" href="#">Contact</a>
+        </div>
+        <div class="state-item">
+          <span class="state-label">Hover state</span>
+          <a class="rounded-full bg-amber-50 px-5 py-2.5 text-sm font-medium text-stone-950 font-syne" href="#">Contact</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-8">
+      <span class="ds-eyebrow mb-3" style="display:block;">Icon Buttons — Circle, amber glass</span>
+      <div class="state-strip">
+        <div class="state-item">
+          <span class="state-label">Default</span>
+          <a class="flex h-10 w-10 items-center justify-center rounded-full border border-amber-100/30 bg-amber-100/10 text-amber-50 transition hover:bg-amber-100/20 hover:text-white" href="#">
+            <svg aria-hidden="true" class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.84c0-2.52 1.49-3.91 3.77-3.91 1.09 0 2.23.2 2.23.2v2.47h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.44 2.91h-2.34V22C18.34 21.24 22 17.08 22 12.06Z"></path></svg>
+          </a>
+        </div>
+        <div class="state-item">
+          <span class="state-label">Hover state</span>
+          <a class="flex h-10 w-10 items-center justify-center rounded-full border border-amber-100/30 bg-amber-100/20 text-white" href="#">
+            <svg aria-hidden="true" class="h-4 w-4" fill="currentColor" viewbox="0 0 24 24"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.84c0-2.52 1.49-3.91 3.77-3.91 1.09 0 2.23.2 2.23.2v2.47h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.44 2.91h-2.34V22C18.34 21.24 22 17.08 22 12.06Z"></path></svg>
+          </a>
+        </div>
+        <div class="state-item">
+          <span class="state-label">Dark overlay (lg)</span>
+          <a class="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-amber-50 transition hover:bg-white/15" href="#">
+            <i class="h-5 w-5" data-lucide="instagram"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="ds-divider"/>
+
+    <!-- INPUT -->
+    <h3 class="text-sm font-semibold uppercase tracking-widest text-amber-200/80 font-syne mb-6">Input</h3>
+    <div class="bg-[#f4eadc] p-6 mb-4">
+      <div class="mb-4">
+        <span class="ds-eyebrow mb-3" style="display:block;color:rgba(0,0,0,0.35);">Email Input — Default</span>
+        <div class="flex flex-col gap-3 sm:flex-row" style="max-width:480px;">
+          <input class="min-h-12 flex-1 border border-stone-950/15 bg-white px-4 text-sm text-stone-950 placeholder:text-stone-400 font-syne" placeholder="Subscribe newsletter" type="email"/>
+          <a class="inline-flex items-center justify-center bg-stone-950 px-5 py-3 text-sm font-semibold text-amber-50 font-syne" href="#">Stay connected</a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="ds-divider"/>
+
+    <!-- CARDS -->
+    <h3 class="text-sm font-semibold uppercase tracking-widest text-amber-200/80 font-syne mb-6">Cards</h3>
+
+    <div class="mb-10">
+      <span class="ds-eyebrow mb-4" style="display:block;">kava-card — Dark glass with gradient shine</span>
+      <div class="grid gap-5 md:grid-cols-3">
+        <article class="kava-card rounded-[1.75rem] border border-white/10 bg-white/[0.045] p-6">
+          <div class="relative">
+            <svg aria-hidden="true" class="lucide lucide-sparkles h-6 w-6 text-amber-100" data-lucide="sparkles" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path></svg>
+            <h3 class="mt-5 text-2xl tracking-tight text-amber-50 font-geist">Exceptional beverages</h3>
+            <p class="mt-3 text-base leading-7 text-stone-400 font-syne">Rich espresso, Iced Chai Lattes, teas, smoothies, and café favourites.</p>
+          </div>
+        </article>
+        <article class="kava-card rounded-[1.75rem] border border-white/10 bg-white/[0.045] p-6">
+          <div class="relative">
+            <svg aria-hidden="true" class="lucide lucide-croissant h-6 w-6 text-amber-100" data-lucide="croissant" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><path d="M10.2 18H4.774a1.5 1.5 0 0 1-1.352-.97 11 11 0 0 1 .132-6.487"></path><path d="M18 10.2V4.774a1.5 1.5 0 0 0-.97-1.352 11 11 0 0 0-6.486.132"></path></svg>
+            <h3 class="mt-5 text-2xl tracking-tight text-amber-50 font-geist">Homemade soups</h3>
+            <p class="mt-3 text-base leading-7 text-stone-400 font-syne">Soups, sandwiches, breakfast bites, and easy lunches.</p>
+          </div>
+        </article>
+        <article class="rounded-[1.5rem] border border-white/10 bg-white/[0.045] p-6">
+          <p class="kava-outline-text text-5xl tracking-tight font-geist">01</p>
+          <h3 class="mt-6 text-xl tracking-tight text-amber-50 font-geist">Numbered card</h3>
+          <p class="mt-3 text-base leading-7 text-stone-400 font-syne">Outline-text numbered variant used in the suggestions section.</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="mb-10">
+      <span class="ds-eyebrow mb-4" style="display:block;">Feature card — Light surface, border-l accent, hover lift</span>
+      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <article class="group relative overflow-hidden border border-stone-950/10 border-l-4 border-l-stone-950 bg-gradient-to-br from-white via-white to-stone-100 p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-2xl hover:shadow-stone-950/10">
+          <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-stone-950 text-amber-50">
+            <svg aria-hidden="true" class="lucide lucide-coffee h-6 w-6" data-lucide="coffee" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><path d="M10 2v2"></path><path d="M14 2v2"></path><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"></path><path d="M6 2v2"></path></svg>
+          </div>
+          <h3 class="mt-6 text-xl tracking-tight font-geist">Coffee classics</h3>
+          <p class="mt-3 text-base leading-7 text-stone-600 font-syne">Hover for lift + shadow transition.</p>
+        </article>
+        <article class="group relative overflow-hidden border border-stone-950/10 border-l-4 border-l-stone-950 bg-gradient-to-br from-white via-white to-stone-100 p-5 shadow-sm -translate-y-1 shadow-2xl shadow-stone-950/10">
+          <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-stone-950 text-amber-50">
+            <svg aria-hidden="true" class="lucide lucide-badge-check h-6 w-6" data-lucide="badge-check" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"></path><path d="m9 12 2 2 4-4"></path></svg>
+          </div>
+          <h3 class="mt-6 text-xl tracking-tight font-geist">Hover state</h3>
+          <p class="mt-3 text-base leading-7 text-stone-600 font-syne">–translate-y-1 + shadow-2xl applied.</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="mb-10">
+      <span class="ds-eyebrow mb-4" style="display:block;">Info card — Light surface, border-l, icon row</span>
+      <div class="grid gap-4 sm:grid-cols-2" style="max-width:560px;">
+        <div class="border border-stone-950/10 border-l-4 border-l-stone-950 bg-white/70 p-5 shadow-sm">
+          <svg aria-hidden="true" class="lucide lucide-clock-3 h-5 w-5 text-amber-100" data-lucide="clock-3" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6h4"></path></svg>
+          <h3 class="mt-4 text-lg font-medium text-stone-950 font-syne">Stylish place to stay</h3>
+          <p class="mt-2 text-base leading-7 text-stone-600 font-syne">Settle in for work, conversation, or a quiet reset.</p>
+        </div>
+        <div class="border border-stone-950/10 border-l-4 border-l-stone-950 bg-white/70 p-5 shadow-sm">
+          <svg aria-hidden="true" class="lucide lucide-donut h-5 w-5 text-amber-100" data-lucide="donut" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><path d="M20.5 10a2.5 2.5 0 0 1-2.4-3H18a2.95 2.95 0 0 1-2.6-4.4 10 10 0 1 0 6.3 7.1c-.3.2-.8.3-1.2.3"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          <h3 class="mt-4 text-lg font-medium text-stone-950 font-syne">Fresh pastry counter</h3>
+          <p class="mt-2 text-base leading-7 text-stone-600 font-syne">Croissants, muffins, scones, danishes, cookies.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-10">
+      <span class="ds-eyebrow mb-4" style="display:block;">Review card — Dark, left amber accent border</span>
+      <blockquote class="border border-white/10 border-l-4 border-l-amber-200/60 bg-white/[0.04] p-6 sm:p-8" style="max-width:600px;">
+        <div class="flex gap-1 text-amber-200">
+          <svg aria-hidden="true" class="lucide lucide-star h-4 w-4 fill-current" data-lucide="star" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 20.01a.53.53 0 0 1-.77-.56l.881-5.139a2.123 2.123 0 0 0-.611-1.879L2.16 8.795a.53.53 0 0 1 .294-.906l5.165-.755a2.123 2.123 0 0 0 1.597-1.16z"></path></svg>
+          <svg aria-hidden="true" class="lucide lucide-star h-4 w-4 fill-current" data-lucide="star" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 20.01a.53.53 0 0 1-.77-.56l.881-5.139a2.123 2.123 0 0 0-.611-1.879L2.16 8.795a.53.53 0 0 1 .294-.906l5.165-.755a2.123 2.123 0 0 0 1.597-1.16z"></path></svg>
+          <svg aria-hidden="true" class="lucide lucide-star h-4 w-4 fill-current" data-lucide="star" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 20.01a.53.53 0 0 1-.77-.56l.881-5.139a2.123 2.123 0 0 0-.611-1.879L2.16 8.795a.53.53 0 0 1 .294-.906l5.165-.755a2.123 2.123 0 0 0 1.597-1.16z"></path></svg>
+          <svg aria-hidden="true" class="lucide lucide-star h-4 w-4 fill-current" data-lucide="star" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 20.01a.53.53 0 0 1-.77-.56l.881-5.139a2.123 2.123 0 0 0-.611-1.879L2.16 8.795a.53.53 0 0 1 .294-.906l5.165-.755a2.123 2.123 0 0 0 1.597-1.16z"></path></svg>
+          <svg aria-hidden="true" class="lucide lucide-star h-4 w-4 fill-current" data-lucide="star" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 20.01a.53.53 0 0 1-.77-.56l.881-5.139a2.123 2.123 0 0 0-.611-1.879L2.16 8.795a.53.53 0 0 1 .294-.906l5.165-.755a2.123 2.123 0 0 0 1.597-1.16z"></path></svg>
+        </div>
+        <p class="mt-5 text-2xl leading-9 tracking-tight text-amber-50 font-geist">"Huge selection of sandwiches and pastries."</p>
+        <footer class="mt-6 text-base text-stone-400 font-syne">Customer review highlight</footer>
+      </blockquote>
+    </div>
+
+    <div class="mb-10">
+      <span class="ds-eyebrow mb-4" style="display:block;">Stats card — Dark glass, rounded</span>
+      <div class="grid gap-5 sm:grid-cols-2" style="max-width:480px;">
+        <div class="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
+          <div class="flex items-center justify-between gap-4">
+            <p class="text-lg font-semibold text-amber-50 font-syne">Google Reviews</p>
+            <p class="text-3xl tracking-tight text-amber-100 font-geist">4.7</p>
+          </div>
+          <p class="mt-2 text-base text-stone-400 font-syne">444 reviews</p>
+        </div>
+        <div class="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
+          <div class="flex items-center justify-between gap-4">
+            <p class="text-lg font-semibold text-amber-50 font-syne">Facebook</p>
+            <p class="text-3xl tracking-tight text-amber-100 font-geist">5.0</p>
+          </div>
+          <p class="mt-2 text-base text-stone-400 font-syne">16 votes</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-10">
+      <span class="ds-eyebrow mb-4" style="display:block;">Glass card — Backdrop blur, black/35 overlay</span>
+      <div class="relative overflow-hidden bg-stone-950" style="max-width:480px;height:200px;">
+        <img alt="Cafe counter" class="h-full w-full object-cover opacity-80" src="assets/4499e0efb1422eea_photo-1442512595331-e89e73853f.avif"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-6">
+          <div class="rounded-3xl border border-white/15 bg-black/35 p-5 text-amber-50 backdrop-blur-xl">
+            <p class="text-sm font-medium text-amber-100 font-syne">Average visit</p>
+            <p class="mt-1 text-3xl tracking-tight font-geist">15 minutes</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-10">
+      <span class="ds-eyebrow mb-4" style="display:block;">CTA Banner — Dark full-width with rounded amber button</span>
+      <div class="bg-stone-950 p-6 text-amber-50 shadow-2xl shadow-stone-950/20 sm:p-8 lg:flex lg:items-center lg:justify-between">
+        <div>
+          <h3 class="text-2xl tracking-tight font-geist">Dietary-friendly cafe options</h3>
+          <p class="mt-2 text-base leading-7 text-amber-50/70 font-syne">Ask about vegan and gluten-free baked goods available today.</p>
+        </div>
+        <a class="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-amber-100 px-6 py-3 text-sm font-medium text-stone-950 lg:mt-0 font-syne" href="#">
+          Call ahead
+          <svg aria-hidden="true" class="lucide lucide-phone h-4 w-4" data-lucide="phone" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  4. LAYOUT & SPACING
+═══════════════════════════════════════════ -->
+<section class="bg-[#0d0906] ds-section" id="ds-layout">
+  <div class="ds-section-inner">
+    <span class="ds-eyebrow">Section 04</span>
+    <h2 class="ds-heading">Layout &amp; Spacing</h2>
+    <p class="ds-desc">Standard container, grid patterns, and section padding used across the reference.</p>
+
+    <!-- Container -->
+    <h3 class="text-sm font-semibold uppercase tracking-widest text-amber-200/80 font-syne mb-4">Container</h3>
+    <div class="layout-demo mb-8">
+      <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+        <div class="layout-col"><span class="layout-col-label">max-w-7xl · px-5 sm:px-6 lg:px-8</span></div>
+      </div>
+    </div>
+
+    <!-- Hero layout -->
+    <h3 class="text-sm font-semibold uppercase tracking-widest text-amber-200/80 font-syne mb-4">Pattern 1 — Hero: Full-screen + bottom split grid</h3>
+    <div class="layout-demo mb-8">
+      <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+        <div class="grid gap-4 mb-4">
+          <div class="layout-col" style="min-height:80px;"><span class="layout-col-label">H1 — max-w-5xl · pt-28 sm:pt-32 lg:pt-36</span></div>
+        </div>
+        <div class="grid gap-4 lg:grid-cols-2">
+          <div class="layout-col"><span class="layout-col-label">Text card + CTA buttons · max-w-xl</span></div>
+          <div class="layout-col hidden lg:flex"><span class="layout-col-label">Empty / decorative side</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- About layout -->
+    <h3 class="text-sm font-semibold uppercase tracking-widest text-amber-200/80 font-syne mb-4">Pattern 2 — Split: Asymmetric 2-col [0.95fr / 1.05fr]</h3>
+    <div class="layout-demo mb-8">
+      <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+        <div class="grid gap-4 lg:grid-cols-[0.95fr_1.05fr]">
+          <div class="layout-col" style="min-height:100px;"><span class="layout-col-label">Copy + cards · 0.95fr</span></div>
+          <div class="layout-col" style="min-height:100px;"><span class="layout-col-label">Image + floating card · 1.05fr</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Menu grid -->
+    <h3 class="text-sm font-semibold uppercase tracking-widest text-amber-200/80 font-syne mb-4">Pattern 3 — Three-col image grid with vertical offset</h3>
+    <div class="layout-demo mb-8">
+      <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+        <div class="grid gap-4 lg:grid-cols-3">
+          <div class="layout-col"><span class="layout-col-label">Col 1 · baseline</span></div>
+          <div class="layout-col lg:translate-y-8"><span class="layout-col-label">Col 2 · lg:translate-y-8</span></div>
+          <div class="layout-col"><span class="layout-col-label">Col 3 · baseline</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Four-col -->
+    <h3 class="text-sm font-semibold uppercase tracking-widest text-amber-200/80 font-syne mb-4">Pattern 4 — Four-col feature grid</h3>
+    <div class="layout-demo mb-8">
+      <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <div class="layout-col"><span class="layout-col-label">1 / 4</span></div>
+          <div class="layout-col"><span class="layout-col-label">2 / 4</span></div>
+          <div class="layout-col"><span class="layout-col-label">3 / 4</span></div>
+          <div class="layout-col"><span class="layout-col-label">4 / 4</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spacing tokens -->
+    <h3 class="text-sm font-semibold uppercase tracking-widest text-amber-200/80 font-syne mb-4">Section Padding</h3>
+    <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="border border-white/10 bg-white/[0.04] p-5">
+        <p class="text-sm font-medium uppercase tracking-widest text-stone-500 font-syne">Section vertical</p>
+        <p class="mt-2 text-lg tracking-tight font-geist text-amber-50">py-20 sm:py-28</p>
+        <p class="mt-1 text-sm text-stone-400 font-syne">80px · 112px</p>
+      </div>
+      <div class="border border-white/10 bg-white/[0.04] p-5">
+        <p class="text-sm font-medium uppercase tracking-widest text-stone-500 font-syne">Hero top padding</p>
+        <p class="mt-2 text-lg tracking-tight font-geist text-amber-50">pt-28 sm:pt-32 lg:pt-36</p>
+        <p class="mt-1 text-sm text-stone-400 font-syne">112 · 128 · 144px</p>
+      </div>
+      <div class="border border-white/10 bg-white/[0.04] p-5">
+        <p class="text-sm font-medium uppercase tracking-widest text-stone-500 font-syne">Card padding</p>
+        <p class="mt-2 text-lg tracking-tight font-geist text-amber-50">p-5 / p-6 / sm:p-8</p>
+        <p class="mt-1 text-sm text-stone-400 font-syne">20 · 24 · 32px</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  5. MOTION & INTERACTION
+═══════════════════════════════════════════ -->
+<section class="bg-[#100c08] ds-section" id="ds-motion">
+  <div class="ds-section-inner">
+    <span class="ds-eyebrow">Section 05</span>
+    <h2 class="ds-heading">Motion &amp; Interaction</h2>
+    <p class="ds-desc">All animation and transition behaviors present in the reference design. Hover each demo to observe the live effect.</p>
+
+    <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+
+      <!-- slow-drift -->
+      <div class="motion-box overflow-hidden" style="position:relative;height:220px;padding:0;">
+        <img alt="slow-drift demo" class="slow-drift h-full w-full object-cover opacity-80" src="assets/9279993563f9702c_photo-1497935586351-b67a49e012.avif" style="position:absolute;inset:0;"/>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent);display:flex;align-items:flex-end;padding:1.25rem;">
+          <div>
+            <p class="motion-caption" style="margin-top:0;">slowDrift animation</p>
+            <p class="text-sm text-amber-50/80 font-syne">.slow-drift — 18s ease-in-out infinite alternate<br/>translate3d(±1.5%, ±1%) scale(1.03→1.08)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- hover scale (image card) -->
+      <div class="motion-box" style="padding:0;overflow:hidden;height:220px;position:relative;">
+        <div class="group relative overflow-hidden h-full w-full bg-stone-950" style="cursor:pointer;">
+          <img alt="hover scale demo" class="h-full w-full object-cover opacity-90 transition duration-500 group-hover:scale-105" src="assets/c02b89c65094170b_photo-1509365465985-25d11c17e8.avif"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/10 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-4">
+            <p class="motion-caption" style="margin-top:0;">Image hover scale</p>
+            <p class="text-sm text-amber-50/80 font-syne">group-hover:scale-105<br/>transition duration-500</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- hover lift (feature card) -->
+      <div class="motion-box" style="padding:1.5rem;height:220px;align-items:stretch;justify-content:flex-start;">
+        <p class="motion-caption" style="margin-top:0;margin-bottom:1rem;align-self:flex-start;">Card hover lift</p>
+        <article class="group relative overflow-hidden border border-stone-950/10 border-l-4 border-l-stone-950 bg-gradient-to-br from-white via-white to-stone-100 p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-2xl hover:shadow-stone-950/10 flex-1" style="cursor:pointer;">
+          <p class="text-sm text-stone-600 font-syne">hover:-translate-y-1<br/>hover:shadow-2xl<br/>transition (default 150ms)</p>
+        </article>
+      </div>
+
+      <!-- button hover amber -->
+      <div class="motion-box" style="height:160px;">
+        <p class="motion-caption" style="margin-top:0;">Primary button hover</p>
+        <a class="inline-flex items-center justify-center gap-3 bg-amber-100 px-6 py-3 text-sm font-semibold uppercase tracking-widest text-stone-950 transition hover:bg-amber-50 font-syne" href="#">
+          Hover me <span class="h-2 w-2 bg-stone-950"></span>
+        </a>
+        <p class="text-xs text-stone-500 font-syne">bg-amber-100 → bg-amber-50<br/>transition (150ms ease)</p>
+      </div>
+
+      <!-- button hover ghost -->
+      <div class="motion-box" style="height:160px;">
+        <p class="motion-caption" style="margin-top:0;">Ghost button hover</p>
+        <a class="inline-flex items-center justify-center gap-2 rounded-full border border-amber-100/25 bg-white/10 px-6 py-3 text-sm font-semibold text-amber-50 transition hover:bg-white/15 font-syne" href="#">
+          Hover me
+          <svg aria-hidden="true" class="lucide lucide-arrow-right h-4 w-4" data-lucide="arrow-right" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+        </a>
+        <p class="text-xs text-stone-500 font-syne">bg-white/10 → bg-white/15<br/>transition (150ms ease)</p>
+      </div>
+
+      <!-- icon button hover -->
+      <div class="motion-box" style="height:160px;">
+        <p class="motion-caption" style="margin-top:0;">Icon button hover</p>
+        <a class="flex h-11 w-11 items-center justify-center rounded-full border border-amber-100/30 bg-amber-100/10 text-amber-50 transition hover:bg-amber-100/20 hover:text-white" href="#">
+          <i class="h-5 w-5" data-lucide="coffee"></i>
+        </a>
+        <p class="text-xs text-stone-500 font-syne">bg/10 → bg/20 · color → white<br/>transition (150ms ease)</p>
+      </div>
+
+      <!-- nav link hover -->
+      <div class="motion-box" style="height:160px;">
+        <p class="motion-caption" style="margin-top:0;">Nav link hover</p>
+        <a class="text-sm font-medium text-amber-50/80 transition hover:text-amber-100 font-syne" href="#" style="font-size:1rem;">About</a>
+        <p class="text-xs text-stone-500 font-syne">text-amber-50/80 → text-amber-100<br/>transition (150ms ease)</p>
+      </div>
+
+      <!-- footer link hover -->
+      <div class="motion-box" style="height:160px;">
+        <p class="motion-caption" style="margin-top:0;">Footer link hover</p>
+        <a class="text-sm font-medium text-stone-400 transition hover:text-amber-50 font-syne" href="#" style="font-size:0.9rem;">About · Ritual · Visit</a>
+        <p class="text-xs text-stone-500 font-syne">text-stone-400 → text-amber-50<br/>transition (150ms ease)</p>
+      </div>
+
+      <!-- ticker -->
+      <div class="motion-box" style="height:160px;padding:0;justify-content:center;">
+        <div class="overflow-hidden w-full px-5 py-3 border border-amber-100/15 bg-white/[0.04]">
+          <div class="flex min-w-max gap-8">
+            <span class="text-sm font-semibold uppercase tracking-[0.28em] text-amber-100/70 font-syne">Locally roasted</span>
+            <span class="text-sm font-semibold uppercase tracking-[0.28em] text-amber-100/70 font-syne">Fresh baked</span>
+            <span class="text-sm font-semibold uppercase tracking-[0.28em] text-amber-100/70 font-syne">Family owned</span>
+            <span class="text-sm font-semibold uppercase tracking-[0.28em] text-amber-100/70 font-syne">Vegan options</span>
+            <span class="text-sm font-semibold uppercase tracking-[0.28em] text-amber-100/70 font-syne">Donut days</span>
+          </div>
+        </div>
+        <p class="motion-caption">Static ticker banner — overflow-hidden + flex min-w-max</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+  6. ICONS
+═══════════════════════════════════════════ -->
+<section class="bg-[#0d0906] ds-section" id="ds-icons">
+  <div class="ds-section-inner">
+    <span class="ds-eyebrow">Section 06</span>
+    <h2 class="ds-heading">Icons</h2>
+    <p class="ds-desc">Lucide icon set — same icon set, markup, and stroke-width as the reference. All icons rendered via lucide.createIcons() at stroke-width 1.5. Sizes: h-4 w-4 · h-5 w-5 · h-6 w-6.</p>
+
+    <!-- Size variants -->
+    <h3 class="text-sm font-semibold uppercase tracking-widest text-amber-200/80 font-syne mb-4">Size Variants</h3>
+    <div class="state-strip mb-8">
+      <div class="state-item">
+        <span class="state-label">h-4 w-4 (16px)</span>
+        <div class="motion-box" style="padding:1.25rem;height:auto;">
+          <i class="h-4 w-4 text-amber-100" data-lucide="coffee"></i>
+        </div>
+      </div>
+      <div class="state-item">
+        <span class="state-label">h-5 w-5 (20px)</span>
+        <div class="motion-box" style="padding:1.25rem;height:auto;">
+          <i class="h-5 w-5 text-amber-100" data-lucide="coffee"></i>
+        </div>
+      </div>
+      <div class="state-item">
+        <span class="state-label">h-6 w-6 (24px)</span>
+        <div class="motion-box" style="padding:1.25rem;height:auto;">
+          <i class="h-6 w-6 text-amber-100" data-lucide="coffee"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color inheritance -->
+    <h3 class="text-sm font-semibold uppercase tracking-widest text-amber-200/80 font-syne mb-4">Color Inheritance</h3>
+    <div class="state-strip mb-8">
+      <div class="state-item">
+        <span class="state-label">text-amber-100</span>
+        <i class="h-6 w-6 text-amber-100" data-lucide="sparkles"></i>
+      </div>
+      <div class="state-item">
+        <span class="state-label">text-amber-200</span>
+        <i class="h-6 w-6 text-amber-200" data-lucide="star"></i>
+      </div>
+      <div class="state-item">
+        <span class="state-label">text-amber-50</span>
+        <i class="h-6 w-6 text-amber-50" data-lucide="coffee"></i>
+      </div>
+      <div class="state-item">
+        <span class="state-label">text-stone-400</span>
+        <i class="h-6 w-6 text-stone-400" data-lucide="clock"></i>
+      </div>
+    </div>
+
+    <!-- Icon in wrappers -->
+    <h3 class="text-sm font-semibold uppercase tracking-widest text-amber-200/80 font-syne mb-4">Icon Wrappers</h3>
+    <div class="state-strip mb-10">
+      <div class="state-item">
+        <span class="state-label">Amber glass (nav)</span>
+        <span class="flex h-10 w-10 items-center justify-center rounded-full border border-amber-200/30 bg-amber-100/10">
+          <i class="h-5 w-5 text-amber-100" data-lucide="coffee"></i>
+        </span>
+      </div>
+      <div class="state-item">
+        <span class="state-label">Stone dark (feature)</span>
+        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-stone-950 text-amber-50">
+          <i class="h-6 w-6" data-lucide="badge-check"></i>
+        </div>
+      </div>
+      <div class="state-item">
+        <span class="state-label">Stone circle (contact)</span>
+        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-stone-950 text-amber-50">
+          <i class="h-5 w-5" data-lucide="map-pin"></i>
+        </span>
+      </div>
+      <div class="state-item">
+        <span class="state-label">White/10 dark</span>
+        <a class="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-amber-50 transition hover:bg-white/15" href="#">
+          <i class="h-5 w-5" data-lucide="instagram"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Full icon grid -->
+    <h3 class="text-sm font-semibold uppercase tracking-widest text-amber-200/80 font-syne mb-4">All Icons Used in Reference</h3>
+    <div class="icon-grid">
+      <div class="icon-cell"><i class="h-5 w-5 text-amber-100" data-lucide="coffee"></i><span class="icon-name">coffee</span></div>
+      <div class="icon-cell"><i class="h-5 w-5 text-amber-100" data-lucide="arrow-right"></i><span class="icon-name">arrow-right</span></div>
+      <div class="icon-cell"><i class="h-5 w-5 text-amber-100" data-lucide="menu"></i><span class="icon-name">menu</span></div>
+      <div class="icon-cell"><i class="h-5 w-5 text-amber-100" data-lucide="sparkles"></i><span class="icon-name">sparkles</span></div>
+      <div class="icon-cell"><i class="h-5 w-5 text-amber-100" data-lucide="croissant"></i><span class="icon-name">croissant</span></div>
+      <div class="icon-cell"><i class="h-5 w-5 text-amber-100" data-lucide="sandwich"></i><span class="icon-name">sandwich</span></div>
+      <div class="icon-cell"><i class="h-5 w-5 text-amber-100" data-lucide="badge-check"></i><span class="icon-name">badge-check</span></div>
+      <div class="icon-cell"><i class="h-5 w-5 text-amber-100" data-lucide="star"></i><span class="icon-name">star</span></div>
+      <div class="icon-cell"><i class="h-5 w-5 text-amber-100" data-lucide="clock"></i><span class="icon-name">clock</span></div>
+      <div class="icon-cell"><i class="h-5 w-5 text-amber-100" data-lucide="clock-3"></i><span class="icon-name">clock-3</span></div>
+      <div class="icon-cell"><i class="h-5 w-5 text-amber-100" data-lucide="donut"></i><span class="icon-name">donut</span></div>
+      <div class="icon-cell"><i class="h-5 w-5 text-amber-100" data-lucide="receipt"></i><span class="icon-name">receipt</span></div>
+      <div class="icon-cell"><i class="h-5 w-5 text-amber-100" data-lucide="map-pin"></i><span class="icon-name">map-pin</span></div>
+      <div class="icon-cell"><i class="h-5 w-5 text-amber-100" data-lucide="phone"></i><span class="icon-name">phone</span></div>
+      <div class="icon-cell"><i class="h-5 w-5 text-amber-100" data-lucide="phone-call"></i><span class="icon-name">phone-call</span></div>
+      <div class="icon-cell"><i class="h-5 w-5 text-amber-100" data-lucide="navigation"></i><span class="icon-name">navigation</span></div>
+      <div class="icon-cell"><i class="h-5 w-5 text-amber-100" data-lucide="facebook"></i><span class="icon-name">facebook</span></div>
+      <div class="icon-cell"><i class="h-5 w-5 text-amber-100" data-lucide="instagram"></i><span class="icon-name">instagram</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="border-t border-white/10 bg-[#100c08] py-10">
+  <div class="mx-auto flex max-w-7xl flex-col gap-6 px-5 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
+    <div>
+      <a class="flex items-center gap-3" href="#">
+        <span class="flex h-10 w-10 items-center justify-center rounded-full border border-amber-200/30 bg-amber-100/10">
+          <svg aria-hidden="true" class="lucide lucide-coffee h-5 w-5 text-amber-100" data-lucide="coffee" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><path d="M10 2v2"></path><path d="M14 2v2"></path><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"></path><path d="M6 2v2"></path></svg>
+        </span>
+        <span class="text-xl tracking-tight text-amber-50 font-geist">KÃVA &amp; Co. Design System</span>
+      </a>
+      <p class="mt-3 text-base text-stone-400 font-syne">Design System · Pattern Library · Living Documentation</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-4">
+      <a class="text-sm font-medium text-stone-400 transition hover:text-amber-50 font-syne" href="#ds-hero">Hero</a>
+      <a class="text-sm font-medium text-stone-400 transition hover:text-amber-50 font-syne" href="#ds-typography">Typography</a>
+      <a class="text-sm font-medium text-stone-400 transition hover:text-amber-50 font-syne" href="#ds-colors">Colors</a>
+      <a class="text-sm font-medium text-stone-400 transition hover:text-amber-50 font-syne" href="#ds-components">Components</a>
+      <a class="text-sm font-medium text-stone-400 transition hover:text-amber-50 font-syne" href="#ds-layout">Layout</a>
+      <a class="text-sm font-medium text-stone-400 transition hover:text-amber-50 font-syne" href="#ds-motion">Motion</a>
+      <a class="text-sm font-medium text-stone-400 transition hover:text-amber-50 font-syne" href="#ds-icons">Icons</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const menuButtonDS = document.getElementById("menuButtonDS");
+  const mobileMenuDS = document.getElementById("mobileMenuDS");
+  if (menuButtonDS && mobileMenuDS) {
+    menuButtonDS.addEventListener("click", () => { mobileMenuDS.classList.toggle("hidden"); });
+    document.querySelectorAll("#mobileMenuDS a").forEach((link) => {
+      link.addEventListener("click", () => { mobileMenuDS.classList.add("hidden"); });
+    });
+  }
+
+  lucide.createIcons({ attrs: { "stroke-width": 1.5 } });
+</script>
+</body>
+</html>
